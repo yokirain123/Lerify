@@ -37,7 +37,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         active && "text-[var(--accent-color)]"
         )}>
             <Icon size={26}/>
-            <p className="truncate w-full">{label}</p>
+            <p className='text-[var(--inactive-color)]'>{label}</p>
         </Link>
     );
 }
