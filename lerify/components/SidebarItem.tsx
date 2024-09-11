@@ -37,7 +37,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         active && "text-[var(--accent-color)] "
       )}
     >
-      <Icon className="flex-shrink-0" size={30} />
+      <Icon className="" size={40} />
     </Link>
   );
 };

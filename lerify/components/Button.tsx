@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import { BsPersonFill } from "react-icons/bs";
+import { MdAccountCircle } from "react-icons/md";
 import { twMerge } from "tailwind-merge";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
@@ -13,7 +13,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           `
             w-full
             rounded-full
-            bg-[var(--bg-color)]
+            bg-gray-700
             border
             border-transparent
             disabled:cursor-not-allowed
@@ -29,7 +29,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        <BsPersonFill size={18} />
+        <MdAccountCircle size={45} />
         {children}
       </button>
     );

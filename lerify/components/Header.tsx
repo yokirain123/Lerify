@@ -28,36 +28,36 @@ const Header: React.FC<HeaderProps> = ({children, className}) => {
       )}
     >
       <div className="w-full mb-4 flex items-center justify-between">
-        <div className="hidden md:flex gap-x-2 items-center">
+        <div className="hidden md:flex gap-[3px] items-center">
           <button
             onClick={() => router.back()}
-            className="rounded-full bg-[var(--bg-color)] flex items-center justify-center"
+            className="rounded-l-lg bg-[var(--bg-color)] flex items-center justify-center"
           >
             <RxCaretLeft
               className="text-white hover:text-[var(--accent-color)] transition duration-300"
-              size={30}
+              size={40}
             />
           </button>
           <button
             onClick={() => router.forward()}
-            className="rounded-full bg-[var(--bg-color)] flex items-center justify-center"
+            className="rounded-r-lg bg-[var(--bg-color)] flex items-center justify-center"
           >
             <RxCaretRight
               className="text-white hover:text-[var(--accent-color)] transition duration-300"
-              size={30}
+              size={40}
             />
           </button>
         </div>
         <div className="flex md:hidden gap-x-2 items-center">
           <button>
             <HiHome
-              size={30}
+              size={60}
               className="rounded-full p-2  flex items-center justify-center text-white hover:text-[var(--accent-color)] transition duration-300 bg-[var(--bg-color)]"
             />
           </button>
           <button>
             <HiSearch
-              size={30}
+              size={60}
               className="rounded-full p-2 flex items-center justify-center text-white hover:text-[var(--accent-color)] transition duration-300 bg-[var(--bg-color)]"
             />
           </button>
