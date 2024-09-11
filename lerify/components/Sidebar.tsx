@@ -9,6 +9,7 @@ import { HiSearch } from "react-icons/hi";
 import Box from "./Box";
 import SidebarItem from "./SidebarItem";
 import Library from "./Library";
+import { TbPlaylist } from "react-icons/tb";
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -21,38 +22,39 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     () => [
       {
         icon: HiHome,
-        label: "Home",
-        active: pathname !== "/search",
+        label: "",
+        active: pathname !== "/home",
         href: "/",
       },
       {
         icon: HiSearch,
-        label: "Search",
+        label: "",
         active: pathname === "/search",
         href: "/search",
       },
+      {
+        icon: TbPlaylist,
+        label: "",
+        active: pathname === "/playlists",
+        href: "/playlists"
+      }
     ],
     [pathname]
   );
 
   return (
     <div>
-      <div className="flex h-screen">
-        <div className="hidden md:flex flex-col gap-y-2 w-[320px] h-full bg-black p-2 text-[var(--accent-color)]">
-          <Box>
-            <div className="flex flex-col gap-y-4 px-5 py-4">
-                {routes.map((item) => (<SidebarItem key={item.label}
-                {...item}
-                ></SidebarItem>) )}
+      <div className="flex h-screen px-4">
+        <div className="hidden md:flex justify-center flex-col gap-y-2 w-[100px] h-full bg-black p-2 text-[var(--accent-color)]">
+          <Box className="h-[700px]  flex ">
+            <div className="flex flex-col justify-center gap-y-6 px-5 py-4">
+              {routes.map((item) => (
+                <SidebarItem key={item.label} {...item}></SidebarItem>
+              ))}
             </div>
           </Box>
-          <Box className="overflow-y-auto h-full">
-            <Library/>
-          </Box>
         </div>
-        <main className="h-full flex-1 overflow-y-auto py-2">
-            {children}
-        </main>
+        <main className="h-full flex-1 overflow-y-auto py-2">{children}</main>
       </div>
     </div>
   );

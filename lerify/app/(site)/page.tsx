@@ -1,11 +1,15 @@
 import Header from "@/components/Header";
+import ListItem from "@/components/ListItem";
 
 export default function Home() {
   return (
-    <div className="bg-[var(--bg-color)] rounded-xl h-full w-full overflow-hidden overflow-y-auto">
+    <div className="bg-black rounded-xl h-full w-full overflow-hidden overflow-y-auto">
       <Header>
-        <div className="mb-2 text-4xl text-white font-black">
-          Home
+        <div className="mb-2 text-4xl text-white font-black py-4">
+          
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
+            <ListItem image="/images/like.png" name={"Liked"} href={"Liked"}/>
+          </div>
         </div>
       </Header>
     </div>
