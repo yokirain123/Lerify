@@ -14,10 +14,9 @@ const config: Config = {
         "bg-color": "var(--bg-color)",
       },
       dropShadow: {
-        'white': '0 35px 35px rgba(255, 255, 255, 0.25)',
+        '3xl': '0px 0px 15px #88b4fc',
       }
     },
   },
-  plugins: [],
 };
 export default config;
