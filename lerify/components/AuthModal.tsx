@@ -23,13 +23,15 @@ const AuthModal = () => {
         router.refresh();
         onClose();
     }
-  })
+  }, [session, router, onClose])
 
   const onChange = (open: boolean) => {
+    console.log("Modal open state:", open);
     if (!open) {
-        onClose();
+      onClose();
     }
-  }
+  };
+  
 
   //Styles for auth
   const radii = ["20px", "40px", "20px"] as const;
@@ -50,7 +52,7 @@ const AuthModal = () => {
       <Auth
         theme="dark"
         socialLayout={socialLayout}
-        providers={["google", "apple", "twitter", "discord", "github"]}
+        providers={["google", "github"]}
         appearance={{
           theme: ThemeSupa,
           variables: {

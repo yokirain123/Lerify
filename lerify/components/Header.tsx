@@ -3,34 +3,45 @@
 import { useRouter } from "next/navigation";
 
 import React from "react";
-import { HiSearch } from "react-icons/hi";
-import { HiHome } from "react-icons/hi2";
-import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
+import { Menu, MenuButton, MenuItem, MenuItems, MenuSeparator } from "@headlessui/react";
 
 import { twMerge } from "tailwind-merge";
 import Button from "./Button";
 import useAuthModal from "@/hooks/useAuthModal";
-import { MdAccountCircle } from "react-icons/md";
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
 
+import { HiSearch } from "react-icons/hi";
+import { HiHome } from "react-icons/hi2";
+import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
+import { useUser } from "@/hooks/useUser";
+import { IoLogOut } from "react-icons/io5";
+import { BsGearFill } from "react-icons/bs";
+import { MdAccountCircle } from "react-icons/md";
 
 interface HeaderProps {
   children: React.ReactNode;
   className?: string;
 }
 
-const Header: React.FC<HeaderProps> = ({children, className}) => {
+const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const authModal = useAuthModal();
   const router = useRouter();
 
-  const handleLogout = () => {};
+  const supabaseClient = useSupabaseClient();
+  const { user } = useUser();
+
+  const handleLogout = async () => {
+    const { error } = await supabaseClient.auth.signOut();
+
+    router.refresh();
+
+    if (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <div
-      className={twMerge(
-        `h-fit bg-black p-6`,
-        className
-      )}
-    >
+    <div className={twMerge(`h-fit bg-black p-6`, className)}>
       <div className="w-full mb-4 flex items-center justify-between">
         <div className="hidden md:flex gap-[3px] items-center">
           <button
@@ -66,12 +77,39 @@ const Header: React.FC<HeaderProps> = ({children, className}) => {
             />
           </button>
         </div>
-        <div className="flex items-center gap-x-1 text-lg">
-          <div>
-            <Button onClick={authModal.onOpen} className="flex items-center rounded-2xl p-2 text-white font-bold gap-2"> Log in
-            <MdAccountCircle size={30} />
-            </Button>
-          </div>
+        <div className="flex items-center gap-x-1 text-lg ">
+          {user ? (
+            <div className="flex ">
+              <Menu>
+                <MenuButton className={`text-white hover:text-accent-color transition duration-300`}><MdAccountCircle size={40} /></MenuButton>
+                <MenuItems transition anchor="bottom end" className={`w-40 origin-top-right rounded-xl mt-3
+                  transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0`}>
+                  <MenuItem as="div">
+                    <Button onClick={() => router.push('/account')} className="flex gap-2 text-lg items-center justify-center">Account <MdAccountCircle size={20}/></Button>
+                  </MenuItem>
+                  <MenuSeparator className="h-px bg-black" />
+                  <MenuItem as="div">
+                    <Button className="flex gap-2 text-lg items-center justify-center">Options <BsGearFill size={20}/></Button>
+                  </MenuItem>
+                  <MenuSeparator className="h-px bg-black" />
+                  <MenuItem as="div">
+                    <Button className="flex gap-2 text-lg items-center justify-center" onClick={handleLogout}> Log out <IoLogOut size={25} /></Button>
+                  </MenuItem>
+                </MenuItems>
+              </Menu>
+            </div>
+          ) : (
+            <>
+              <Button
+                onClick={authModal.onOpen}
+                className="flex items-center rounded-2xl p-2 text-white font-bold gap-2"
+              >
+                {" "}
+                Log in
+                <MdAccountCircle size={30} />
+              </Button>
+            </>
+          )}
         </div>
       </div>
       {children}
