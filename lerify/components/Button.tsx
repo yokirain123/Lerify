@@ -12,8 +12,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         className={twMerge(
           `
             w-full
-            rounded-full
-            bg-gray-700
+            bg-bg-color
             border
             border-transparent
             disabled:cursor-not-allowed
@@ -22,6 +21,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             hover:text-[var(--accent-color)]
             transition
             duration-300
+            h-[40px]
         `,
           className
         )}
@@ -29,7 +29,6 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         {...props}
       >
-        <MdAccountCircle size={45} />
         {children}
       </button>
     );

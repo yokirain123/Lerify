@@ -9,6 +9,9 @@ import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 
 import { twMerge } from "tailwind-merge";
 import Button from "./Button";
+import useAuthModal from "@/hooks/useAuthModal";
+import { MdAccountCircle } from "react-icons/md";
+
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -16,6 +19,7 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({children, className}) => {
+  const authModal = useAuthModal();
   const router = useRouter();
 
   const handleLogout = () => {};
@@ -62,9 +66,11 @@ const Header: React.FC<HeaderProps> = ({children, className}) => {
             />
           </button>
         </div>
-        <div className="flex justify-between items-center gap-x-4">
+        <div className="flex items-center gap-x-1 text-lg">
           <div>
-            <Button onClick={() => {}} className="flex items-center gap-x-2 p-1"></Button>
+            <Button onClick={authModal.onOpen} className="flex items-center rounded-2xl p-2 text-white font-bold gap-2"> Log in
+            <MdAccountCircle size={30} />
+            </Button>
           </div>
         </div>
       </div>

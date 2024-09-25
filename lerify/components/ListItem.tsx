@@ -32,7 +32,7 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative group flex items-center sm:w-[300px] justify-around rounded-2xl py-2  overflow-hidden gap-x-4 pr-4 border-4 border-[var(--bg-color)]"
+      className="relative group flex items-center sm:w-[300px] justify-around rounded-3xl py-2  overflow-hidden gap-x-4 pr-4 border-4 border-[var(--bg-color)]"
     >
       <div className="relative min-h-[64px] sm:w-[128px] sm:h-[128px] min-w-[64px] h-[50px] w-[50px]">
         {" "}
