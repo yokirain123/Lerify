@@ -3,7 +3,13 @@
 import { useRouter } from "next/navigation";
 
 import React from "react";
-import { Menu, MenuButton, MenuItem, MenuItems, MenuSeparator } from "@headlessui/react";
+import {
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuItems,
+  MenuSeparator,
+} from "@headlessui/react";
 
 import { twMerge } from "tailwind-merge";
 import Button from "./Button";
@@ -16,7 +22,8 @@ import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { useUser } from "@/hooks/useUser";
 import { IoLogOut } from "react-icons/io5";
 import { BsGearFill } from "react-icons/bs";
-import { MdAccountCircle } from "react-icons/md";
+import { MdAccountCircle, MdOutlineKeyboardArrowDown } from "react-icons/md";
+import toast from "react-hot-toast";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -36,7 +43,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
     router.refresh();
 
     if (error) {
-      console.log(error);
+      toast.error(error.message)
     }
   };
 
@@ -79,21 +86,44 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
         </div>
         <div className="flex items-center gap-x-1 text-lg ">
           {user ? (
-            <div className="flex ">
+            <div className="">
               <Menu>
-                <MenuButton className={`text-white hover:text-accent-color transition duration-300`}><MdAccountCircle size={40} /></MenuButton>
-                <MenuItems transition anchor="bottom end" className={`w-40 origin-top-right rounded-xl mt-3
-                  transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0`}>
+                <MenuButton
+                  className={`text-white hover:text-accent-color transition duration-300 flex flex-row items-center gap-3`}
+                >
+                  <MdAccountCircle className="border-accent-color border-3 rounded-full" size={50} />
+                  Nickname
+                  <MdOutlineKeyboardArrowDown />
+                </MenuButton>
+                <MenuItems
+                  transition
+                  anchor="bottom end"
+                  className={`w-36 origin-top-right rounded-xl mt-3
+                  transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0`}
+                >
                   <MenuItem as="div">
-                    <Button onClick={() => router.push('/account')} className="flex gap-2 text-lg items-center justify-center">Account <MdAccountCircle size={20}/></Button>
+                    <Button
+                      onClick={() => router.push("/account")}
+                      className="flex gap-3 text-lg items-center justify-center"
+                    >
+                      Account <MdAccountCircle size={23} />
+                    </Button>
                   </MenuItem>
                   <MenuSeparator className="h-px bg-black" />
                   <MenuItem as="div">
-                    <Button className="flex gap-2 text-lg items-center justify-center">Options <BsGearFill size={20}/></Button>
+                    <Button className="flex gap-3 text-lg items-center justify-center">
+                      Options <BsGearFill size={20} />
+                    </Button>
                   </MenuItem>
                   <MenuSeparator className="h-px bg-black" />
                   <MenuItem as="div">
-                    <Button className="flex gap-2 text-lg items-center justify-center" onClick={handleLogout}> Log out <IoLogOut size={25} /></Button>
+                    <Button
+                      className="flex gap-3 text-lg items-center justify-center"
+                      onClick={handleLogout}
+                    >
+                      {" "}
+                      Log out <IoLogOut size={25} />
+                    </Button>
                   </MenuItem>
                 </MenuItems>
               </Menu>
