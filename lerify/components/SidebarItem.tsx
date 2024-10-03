@@ -22,7 +22,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
       href={href}
       className={twMerge(
         `
-            flex
+        flex
         items-center
         gap-x-4
         text-md

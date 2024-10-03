@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
+import Link from 'next/link';
 
 import Sidebar from "@/components/Sidebar";
 import SupabaseProvider from "@/providers/SupabaseProvider";

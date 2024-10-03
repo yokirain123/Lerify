@@ -8,8 +8,8 @@ import { HiSearch } from "react-icons/hi";
 
 import Box from "./Box";
 import SidebarItem from "./SidebarItem";
-import Library from "./Library";
 import { TbPlaylist } from "react-icons/tb";
+import { FaPlus } from "react-icons/fa6";
 
 interface SidebarProps {
   children: React.ReactNode;
@@ -37,7 +37,13 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
         label: "",
         active: pathname === "/playlists",
         href: "/playlists"
-      }
+      },
+    {
+      icon: FaPlus,
+      label: '',
+      active: pathname == "",
+      href: ""
+    }
     ],
     [pathname]
   );
