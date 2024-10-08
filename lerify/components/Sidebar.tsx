@@ -23,7 +23,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
       {
         icon: HiHome,
         label: "",
-        active: pathname !== "/home",
+        active: pathname === "/",
         href: "/",
       },
       {
@@ -37,13 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
         label: "",
         active: pathname === "/playlists",
         href: "/playlists"
-      },
-    {
-      icon: FaPlus,
-      label: '',
-      active: pathname == "",
-      href: ""
-    }
+      }
     ],
     [pathname]
   );

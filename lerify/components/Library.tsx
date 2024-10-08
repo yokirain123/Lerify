@@ -1,16 +1,14 @@
 "use client"
 
-import { useRouter } from 'next/router';
 import React from 'react';
 import { FaPlus } from 'react-icons/fa6';
 
 import { TbPlaylist } from 'react-icons/tb';
 
 const Library = () => {
-    const router = useRouter();
   
     const onClick = () => {
-      router.push('./Playlists.tsx'); // Navigate to the playlists page
+      
     };
 
     return (
