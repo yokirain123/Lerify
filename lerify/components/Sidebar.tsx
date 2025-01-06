@@ -9,7 +9,6 @@ import { HiSearch } from "react-icons/hi";
 import Box from "./Box";
 import SidebarItem from "./SidebarItem";
 import { TbPlaylist } from "react-icons/tb";
-import { FaPlus } from "react-icons/fa6";
 
 interface SidebarProps {
   children: React.ReactNode;

@@ -1,0 +1,25 @@
+import getSongs from "@/actions/getSongs";
+import Header from "@/components/Header";
+import React from "react";
+import LocalContent from "./components/LocalContent";
+
+export const revalidate = 0;
+
+async function localSongs() {
+  
+  const songs = await getSongs()
+
+  return (
+    <div className="">
+      <Header>
+        <div className="mb-2 text-4xl text-white font-black py-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">Local Songs</div>
+        </div>
+      </Header>
+      
+      <LocalContent songs={songs}/>
+    </div>
+  );
+}
+
+export default localSongs;

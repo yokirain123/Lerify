@@ -32,12 +32,12 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
       onClick={onClick}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="relative group flex items-center sm:w-[300px] justify-around rounded-3xl py-2  overflow-hidden gap-x-4 pr-4 border-4 border-[var(--bg-color)]"
+      className="relative group flex items-center sm:w-[350px] justify-around rounded-3xl py-2  overflow-hidden gap-x-4 pr-4 border-4 border-[var(--bg-color)]"
     >
       <div className="relative min-h-[64px] sm:w-[128px] sm:h-[128px] min-w-[64px] h-[50px] w-[50px]">
         {" "}
         {/* Explicit size is important */}
-        <Image className="object-cover" fill src={image} alt="Liked" />
+        <Image className="object-cover" fill src={image} alt="Image" />
         <div
           className={`absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 
             ${
@@ -47,7 +47,7 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
           <FaPlay size={30} className="text-white text-2xl" />
         </div>
       </div>
-      <p className="text-[var(--accent-color)] font-bold">{name}</p>
+      <p className="text-[var(--accent-color)] font-bold text-[24px]">{name}</p>
     </button>
   );
 };

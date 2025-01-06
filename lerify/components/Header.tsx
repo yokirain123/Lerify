@@ -24,7 +24,8 @@ import { IoLogOut } from "react-icons/io5";
 import { BsGearFill } from "react-icons/bs";
 import { MdAccountCircle, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import toast from "react-hot-toast";
-
+import Search from "./Search/Search";
+import SearchInput from "./Search/SearchInput";
 interface HeaderProps {
   children: React.ReactNode;
   className?: string;
@@ -48,12 +49,12 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   };
 
   return (
-    <div className={twMerge(`h-fit bg-black p-6`, className)}>
-      <div className="w-full mb-4 flex items-center justify-between">
-        <div className="hidden md:flex gap-[3px] items-center">
+    <div className={twMerge(`h-fit bg-black py-3 px-6`, className)}>
+      <div className="w-full flex items-center justify-between">
+        <div className="hidden md:flex gap-[2px] items-center">
           <button
             onClick={() => router.back()}
-            className="rounded-l-lg bg-[var(--bg-color)] flex items-center justify-center"
+            className="rounded-l-lg bg-[var(--bg-color)] flex items-center justify-center py-4"
           >
             <RxCaretLeft
               className="text-white hover:text-[var(--accent-color)] transition duration-300"
@@ -62,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           </button>
           <button
             onClick={() => router.forward()}
-            className="rounded-r-lg bg-[var(--bg-color)] flex items-center justify-center"
+            className="rounded-r-lg bg-[var(--bg-color)] flex items-center justify-center py-4"
           >
             <RxCaretRight
               className="text-white hover:text-[var(--accent-color)] transition duration-300"
@@ -84,9 +85,10 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             />
           </button>
         </div>
-        <div className="flex items-center gap-x-1 text-lg ">
+        <SearchInput/>
+        <div className="flex items-center gap-x-1 text-lg">
           {user ? (
-            <div className="">
+            <div className="bg-bg-color p-3 rounded-xl">
               <Menu>
                 <MenuButton
                   className={`text-white hover:text-accent-color transition duration-300 flex flex-row items-center gap-3`}
@@ -98,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 <MenuItems
                   transition
                   anchor="bottom end"
-                  className={`w-36 origin-top-right rounded-xl mt-3
+                  className={`w-44 origin-top-right rounded-xl mt-4
                   transition duration-200 ease-out data-[closed]:scale-95 data-[closed]:opacity-0`}
                 >
                   <MenuItem as="div">
@@ -132,7 +134,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             <>
               <Button
                 onClick={authModal.onOpen}
-                className="flex items-center rounded-2xl p-2 text-white font-bold gap-2"
+                className="flex items-center rounded-2xl px-4 text-white font-bold gap-2 py-8 text-2xl"
               >
                 {" "}
                 Log in

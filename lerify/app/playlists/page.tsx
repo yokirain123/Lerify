@@ -5,7 +5,9 @@ import useAuthModal from "@/hooks/useAuthModal";
 import useUploadModal from "@/hooks/useUploadModal";
 import { useUser } from "@/hooks/useUser";
 import { FaPlus } from "react-icons/fa6";
-import type { FC } from "react";
+import { useMemo, type FC } from "react";
+import ListItem from "@/components/ListItem";
+import { usePathname } from "next/navigation";
 
 interface PlaylistsProps {}
 
@@ -22,11 +24,25 @@ const Page: FC<PlaylistsProps> = () => {
     uploadModal.onOpen(); // Open upload modal when the user is authenticated
   };
 
+  const pathname = usePathname();
+
+  const routes = useMemo(
+    () => [
+      {
+        icon: '',
+        label: "",
+        active: pathname === "./local-songs/",
+        href: "/playlists/local-songs",
+      },
+    ],
+    [pathname]
+  );
+
   return (
     <div>
       <Header>
         <div className="mb-2 text-4xl text-white font-black py-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4"></div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">Playlists</div>
         </div>
       </Header>
       <div className="flex">
@@ -39,6 +55,11 @@ const Page: FC<PlaylistsProps> = () => {
             <FaPlus className="ml-2" size={20} />
           </div>
         </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4 px-6 text-4xl">
+        {routes.map((item) => (
+          <><ListItem key={item.label} {...item} image="/images/like.png" name={"Liked"} href={"liked"} /><ListItem key={item.label} {...item} image="/images/local.png" name={"Local Songs"} /></>
+                 ))}
       </div>
     </div>
   );
