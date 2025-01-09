@@ -1,26 +1,36 @@
-import { Song } from "@/types"
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { Song } from '@/types';
 
 const getSongsByUserId = async (): Promise<Song[]> => {
-  const supabase = createServerComponentClient({
-    cookies: cookies,
+
+  const supabase = await createServerComponentClient({
+    cookies: await cookies,  // Pass the awaited cookies
   });
 
-  const { data: sessionData, error: sessionError } = await supabase.auth.getUser()
+  const { data: { user }, error: userError } = await supabase.auth.getUser();
 
-  if (sessionError) {
-    console.log(sessionError.message)
-    return []
-  }
-  
-  const {data, error} = await supabase.from('songs').select('*').eq('user_id', sessionData.user.id).order('created_at', { ascending: false})
-
-  if (error) {
-    console.log(error.message)
+  if (userError) {
+    console.error('Error fetching user:', userError);
+    return [];
   }
 
-  return ( data as any ) || []
-}
+  if (!user) {
+    console.warn('No user found');
+    return [];
+  }
 
-export default getSongsByUserId
+  const { data: songs, error: songsError } = await supabase
+    .from('songs')
+    .select('*')
+    .eq('user_id', user.id);
+
+  if (songsError) {
+    console.error('Error fetching songs:', songsError);
+    return [];
+  }
+
+  return songs || [];
+};
+
+export default getSongsByUserId;

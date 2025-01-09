@@ -24,8 +24,8 @@ import { IoLogOut } from "react-icons/io5";
 import { BsGearFill } from "react-icons/bs";
 import { MdAccountCircle, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import toast from "react-hot-toast";
-import Search from "./Search/Search";
 import SearchInput from "./Search/SearchInput";
+
 interface HeaderProps {
   children: React.ReactNode;
   className?: string;
@@ -85,7 +85,6 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             />
           </button>
         </div>
-        <SearchInput/>
         <div className="flex items-center gap-x-1 text-lg">
           {user ? (
             <div className="bg-bg-color p-3 rounded-xl">
