@@ -25,6 +25,8 @@ const AuthModal = () => {
     }
   }, [session, router, onClose])
 
+  
+
   const onChange = (open: boolean) => {
     console.log("Modal open state:", open);
     if (!open) {

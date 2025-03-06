@@ -1,16 +1,18 @@
+"use client";
+
 import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types";
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaPlay } from "react-icons/fa6";
-import LikeButton from "./LikeButton";
+import LikeButton from "../LikeButton";
 
-interface MediaItemProps {
+interface SearchItemProps {
   data: Song;
   onClick?: (id: string) => void;
 }
 
-const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
+const SearchItem: React.FC<SearchItemProps> = ({ data, onClick }) => {
   const imageUrl = useLoadImage(data) || "/placeholder.png"; // Fallback if URL is null
   const [isHovered, setIsHovered] = useState(false);
 
@@ -22,13 +24,13 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
 
   return (
     <div
-      className="flex w-full min-w-0 items-center h-[100px] bg-bg-color rounded-2xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all duration-300"
+      className="flex w-[350px] h-[120px] bg-bg-color rounded-2xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all duration-300"
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Section */}
-      <div className="relative flex-[0_0_100px] h-full">
+      <div className="relative flex-shrink-0 w-[120px] h-full">
         <Image
           className="rounded-l-2xl object-cover h-full w-full"
           src={imageUrl}
@@ -45,21 +47,19 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
           <FaPlay size={30} className="text-white" />
         </div>
       </div>
-
+      
       {/* Song Details */}
-      <div className="flex flex-col justify-center px-4 py-2 text-white flex-grow min-w-0">
-        <p className="text-lg font-bold text-accent-color truncate">
-          {data.title}
-        </p>
+      <div className="flex flex-col justify-center px-4 py-2 text-white flex-grow relative">
+        <p className="text-lg font-bold text-accent-color text-clip">{data.title}</p>
         <p className="text-sm text-gray-300 truncate">{data.author}</p>
-      </div>
-
-      {/* Like Button Positioned to the Right */}
-      <div className="pr-4">
-        <LikeButton songId={data.id} />
+        
+        {/* Like Button Positioned to the Right */}
+        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+          <LikeButton songId={data.id} />
+        </div>
       </div>
     </div>
   );
 };
 
-export default MediaItem;
+export default SearchItem;

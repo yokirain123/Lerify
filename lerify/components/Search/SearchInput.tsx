@@ -1,43 +1,63 @@
-"use client"
+"use client";
 
 import qs from "query-string";
-import useDebounce from "@/hooks/useDebounce";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState, useEffect, KeyboardEvent } from "react";
 import Input from "../Input";
 
 const SearchInput = () => {
     const router = useRouter();
     const [value, setValue] = useState<string>("");
-    const debouncedValue = useDebounce<string>(value, 500);
+    const [placeholder, setPlaceholder] = useState<string>("");
 
-    useEffect(() =>{
-        const query = {
-            title: debouncedValue,
+    // List of random placeholder texts
+    const placeholders = [
+        "Search...",
+        "What are you looking for?",
+        "So, what's on your mind today?",
+        "Discover something new?",
+        "Enter a title or artist...",
+        "The perfect track is just a search away...",
+        "Let the music hunt begin...",
+        "Search for a song, no need to roll for initiative.",
+        "Need a track that’s over 9000?",
+        "Find a tune to make you feel like The Chosen One.",
+        "Type a song to relive Back to the Future moments."
+    ];
+
+    // Generate a random placeholder on page load
+    useEffect(() => {
+        const randomIndex = Math.floor(Math.random() * placeholders.length);
+        setPlaceholder(placeholders[randomIndex]);
+    }, []); // Empty dependency array to run only once on mount
+
+    const handleSearchSubmit = () => {
+        if (value.trim()) {
+            const query = { title: value };
+            const url = qs.stringifyUrl({
+                url: '/search',
+                query: query,
+            });
+            router.push(url);
         }
+    };
 
-        const url = qs.stringifyUrl({
-            url: '/search',
-            query: query
-        })
-
-        router.push(url)
-    }, [debouncedValue, router])
-
-    // useEffect(() => {
-    //     if (debouncedValue.trim()) {
-    //         const query = qs.stringify({ title: debouncedValue });
-    //         router.push(`/search?${query}`);
-    //     }
-    // }, [debouncedValue, router]);
+    const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleSearchSubmit();
+        }
+    };
 
     return (
-        <Input
-            placeholder="Find?"
-            value={value}
-            onChange={(e) => setValue(e.target.value)}
-            className="w-[75%] py-6 px-16 border-accent-color border-2 rounded-2xl text-white text-xl"
-        />
+        <div className="flex justify-center w-full relative">
+            <Input
+                placeholder={placeholder}
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                onKeyDown={handleKeyDown}
+                className="w-[75%] py-6 px-16 border-accent-color border-2 rounded-2xl text-white text-xl"
+            />
+        </div>
     );
 };
 

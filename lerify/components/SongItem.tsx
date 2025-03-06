@@ -25,9 +25,9 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
   return (
     <div
       onClick={() => onClick(data.id)}
-      className="flex relative group flex-col w-[240px] items-center justify-center rounded-2xl overflow-hidden bg-bg-color cursor-pointer text-white p-4 gap-x-6"
+      className="flex relative group flex-col w-[240px] items-center rounded-2xl overflow-hidden bg-bg-color cursor-pointer text-white p-4 gap-x-6"
     >
-      <div className="relative aspect-square w-full h-full overflow-hidden rounded-2xl" 
+      <div className="relative h-[200px] aspect-square w-full overflow-hidden rounded-2xl" 
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}>
         <Image
@@ -47,7 +47,7 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
       </div>
       <div className="flex flex-col py-3">
         <p className="text-center text-xl text-accent-color font-bold">{data.title}</p>
-        <p className="text-center">{data.author}</p>
+        <p className="text-center truncate">{data.author}</p>
       </div>
     </div>
   );

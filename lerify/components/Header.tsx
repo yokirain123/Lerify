@@ -38,6 +38,8 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
 
+  const userName = user?.user_metadata?.user_name || "Unknown User";
+
   const handleLogout = async () => {
     const { error } = await supabaseClient.auth.signOut();
 
@@ -71,6 +73,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             />
           </button>
         </div>
+        <SearchInput/>
         <div className="flex md:hidden gap-x-2 items-center">
           <button>
             <HiHome
@@ -93,7 +96,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                   className={`text-white hover:text-accent-color transition duration-300 flex flex-row items-center gap-3`}
                 >
                   <MdAccountCircle className="border-accent-color border-3 rounded-full" size={50} />
-                  Nickname
+                  {userName}
                   <MdOutlineKeyboardArrowDown />
                 </MenuButton>
                 <MenuItems

@@ -14,3 +14,21 @@ body,
   --inactive-text: #a8a6a6;
   --bg-color: #1a1a1a;
 }
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px; /* Adjust width */
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a1a; /* Track color */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #88b4fc; /* Scrollbar color */
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #5a8ee0; /* Scrollbar hover color */
+}

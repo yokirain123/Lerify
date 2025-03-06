@@ -16,8 +16,7 @@ const Search = async ({ searchParams }: SearchProps) => {
     <div>
       <Header />
 
-      <div className="p-6">
-        <SearchInput />
+      <div className="p-6 flex flex-col gap-6">
         <SearchContent songs={songs} />
       </div>
     </div>
