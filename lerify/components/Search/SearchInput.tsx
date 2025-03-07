@@ -10,7 +10,6 @@ const SearchInput = () => {
     const [value, setValue] = useState<string>("");
     const [placeholder, setPlaceholder] = useState<string>("");
 
-    // List of random placeholder texts
     const placeholders = [
         "Search...",
         "What are you looking for?",
@@ -25,11 +24,10 @@ const SearchInput = () => {
         "Type a song to relive Back to the Future moments."
     ];
 
-    // Generate a random placeholder on page load
     useEffect(() => {
         const randomIndex = Math.floor(Math.random() * placeholders.length);
         setPlaceholder(placeholders[randomIndex]);
-    }, []); // Empty dependency array to run only once on mount
+    }, []);
 
     const handleSearchSubmit = () => {
         if (value.trim()) {

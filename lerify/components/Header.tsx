@@ -25,6 +25,7 @@ import { BsGearFill } from "react-icons/bs";
 import { MdAccountCircle, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import toast from "react-hot-toast";
 import SearchInput from "./Search/SearchInput";
+import Logo from "./Logo";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -53,6 +54,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   return (
     <div className={twMerge(`h-fit bg-black py-3 px-6`, className)}>
       <div className="w-full flex items-center justify-between">
+      <Logo/>
         <div className="hidden md:flex gap-[2px] items-center">
           <button
             onClick={() => router.back()}

@@ -36,8 +36,6 @@ function Liked() {
   return (
     <div className="w-full">
       <Header />
-
-      {/* Playlist Header */}
       <div className="flex flex-col sm:flex-row items-center gap-5 px-4 sm:px-10 my-5">
         <div className="relative w-40 h-40">
           <Image
@@ -54,8 +52,6 @@ function Liked() {
           </h1>
         </div>
       </div>
-
-      {/* Liked Songs Section */}
       <div className="px-10">
         <div className="w-full backdrop-blur-xl rounded-2xl h-screen p-3">
           <div className="flex flex-col">
