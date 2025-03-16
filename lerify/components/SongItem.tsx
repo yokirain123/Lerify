@@ -25,7 +25,7 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
   return (
     <div
       onClick={() => onClick(data.id)}
-      className="flex relative group flex-col w-[240px] items-center rounded-2xl overflow-hidden bg-bg-color cursor-pointer text-white p-4 gap-x-6"
+      className="flex relative flex-col w-[240px] items-center rounded-2xl overflow-hidden bg-bg-color cursor-pointer text-white p-4 gap-x-6"
     >
       <div className="relative h-[200px] aspect-square w-full overflow-hidden rounded-2xl" 
       onMouseEnter={handleMouseEnter}
@@ -45,10 +45,10 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
           <FaPlay size={30} className="text-white text-2xl" />
         </div>
       </div>
-      <div className="flex flex-col py-3">
-        <p className="text-center text-xl text-accent-color font-bold">{data.title}</p>
-        <p className="text-center truncate">{data.author}</p>
-      </div>
+        <div className="flex flex-col py-3 w-full">
+          <p className="text-center text-xl truncate text-accent-color font-bold">{data.title}</p>
+          <p className="text-center truncate">{data.author}</p>
+        </div>
     </div>
   );
 };

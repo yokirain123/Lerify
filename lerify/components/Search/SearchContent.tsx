@@ -1,16 +1,15 @@
 "use client";
 
 import { Song } from "@/types";
-import MediaItem from "../MediaItem";
-import SongItem from "../SongItem";
-import LikeButton from "../LikeButton";
 import SearchItem from "./SearchItem";
+import useOnPlay from "@/hooks/useOnPlay";
 
 interface SearchContentProps {
   songs: Song[];
 }
 
 const SearchContent: React.FC<SearchContentProps> = ({ songs }) => {
+  const onPlay = useOnPlay(songs);
   if (songs.length === 0) {
     return <div className="text-white">No song found</div>;
   }
@@ -20,7 +19,7 @@ const SearchContent: React.FC<SearchContentProps> = ({ songs }) => {
       {songs.map((song) => (
         <>
           <div key={song.id} className="">
-            <SearchItem onClick={() => {}} data={song} />
+            <SearchItem onClick={(id: string) => onPlay(id)} data={song} />
           </div>
         </>
       ))}

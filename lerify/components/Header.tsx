@@ -109,7 +109,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                 >
                   <MenuItem as="div">
                     <Button
-                      onClick={() => router.push("/account")}
+                      onClick={() => router.push("/profile")}
                       className="flex gap-3 text-lg items-center justify-center"
                     >
                       Account <MdAccountCircle size={23} />

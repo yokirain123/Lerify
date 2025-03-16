@@ -36,7 +36,6 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
     >
       <div className="relative min-h-[64px] sm:w-[128px] sm:h-[128px] min-w-[64px] h-[50px] w-[50px]">
         {" "}
-        {/* Explicit size is important */}
         <Image className="object-cover" fill src={image} alt="Image" />
         <div
           className={`absolute inset-0 flex justify-center items-center bg-black bg-opacity-50 

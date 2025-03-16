@@ -21,14 +21,54 @@ body,
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a; /* Track color */
+  background: #1a1a1a;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #88b4fc; /* Scrollbar color */
+  background: #88b4fc;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #5a8ee0; /* Scrollbar hover color */
+  background: #5a8ee0;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+input[type="range"]::-moz-range-thumb{
+  width: 12px;
+  height: 12px;
+  background: var(--accent-color);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+input[type="range"]::-moz-range-thumb:hover {
+  width: 12px;
+  height: 12px;
+  background: white;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background 0.3s;
 }
