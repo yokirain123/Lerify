@@ -20,10 +20,15 @@ const AuthModal = () => {
 
   useEffect(() => {
     if (session) {
-        router.refresh();
-        onClose();
+      console.log("User Session:", session);
+      if (!session.user?.email) {
+        console.error("⚠️ No email received from Spotify! Supabase requires an email.");
+      }
+      onClose();  // Close modal first
+      router.refresh();
     }
-  }, [session, router, onClose])
+  }, [session, router, onClose]);
+  
 
   
 
@@ -44,6 +49,22 @@ const AuthModal = () => {
   const [socialLayout, setSocialLayout] = useState<SocialLayout>(
     socialAlignments[0] satisfies SocialLayout
   );
+
+  const handleSpotifyLogin = async () => {
+    const { data, error } = await supabaseClient.auth.signInWithOAuth({
+      provider: "spotify",
+      options: {
+        redirectTo: "http://localhost:3000/auth/callback", // Adjust this if needed
+      },
+    });
+  
+    if (error) {
+      console.error("Spotify login error:", error.message);
+    } else {
+      console.log("Spotify login success:", data);
+    }
+  };
+  
   return (
     <Modal
       title="Welcome"
@@ -54,7 +75,7 @@ const AuthModal = () => {
       <Auth
         theme="dark"
         socialLayout={socialLayout}
-        providers={["google", "github"]}
+        providers={["google", "github", "spotify"]}
         appearance={{
           theme: ThemeSupa,
           variables: {
