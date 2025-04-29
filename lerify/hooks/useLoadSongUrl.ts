@@ -1,19 +1,52 @@
-import { Song } from "@/types"
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import { Song } from "@/types";
+import { useSession } from "next-auth/react";
+import { useEffect, useState } from "react";
 
 const useLoadSongUrl = (song: Song) => {
-    const supabaseClient = useSupabaseClient()
+  const { data: session } = useSession(); // Ensure the user is authenticated and has an access token
 
-    if (!song) {
-        return ''
+  console.log("Song Object:", song); // Debugging log for the song object
+  console.log("Access Token from Session:", session?.accessToken); // Debugging log for the access token
+
+  const [songUrl, setSongUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!song) return; // If no song, don't do anything
+    if (!session?.accessToken) {
+      console.error("No access token available in session");
+      return;
     }
 
-    const {data: songData} = supabaseClient
-    .storage
-    .from('songs')
-    .getPublicUrl(song.song_path)
+    const fetchSongPreviewUrl = async () => {
+      try {
+        const res = await fetch(`/api/spotify/track/${song.id}`, {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${session.accessToken}`,
+          },
+        });
 
-    return songData.publicUrl
-}
+        if (!res.ok) {
+          console.error("Failed to fetch song preview URL", res.status);
+          return;
+        }
 
-export default useLoadSongUrl
+        const data = await res.json();
+        if (!data.preview_url) {
+          console.error("No preview URL found in the response");
+          return;
+        }
+
+        setSongUrl(data.preview_url); // Set the song URL state
+      } catch (error) {
+        console.error("Error fetching preview URL", error);
+      }
+    };
+
+    fetchSongPreviewUrl(); // Fetch the song URL when the song changes
+  }, [song, session]); // Dependency array includes both song and session
+
+  return songUrl;
+};
+
+export default useLoadSongUrl;

@@ -1,22 +1,37 @@
 import { Song } from "@/types";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { useSession } from "next-auth/react"; // Make sure you are using the session for access token
 
-const getSongs = async (): Promise<Song[]> => {
-  const supabase = createServerComponentClient({
-    cookies: cookies,
-  });
+const useLoadSongUrl = (song: Song) => {
+  const { data: session } = useSession(); // Ensure the user is authenticated and has an access token
 
-  const { data, error } = await supabase
-    .from("songs")
-    .select("*")
-    .order("created_at", { ascending: false });
+  if (!song || !session?.accessToken) {
+    return ''; // If no song or access token, return empty string
+  }
 
-    if (error) {
-        console.log(error);
+  const fetchSongPreviewUrl = async () => {
+    try {
+      const res = await fetch(`/api/spotify/track/${song.id}`, {
+        headers: {
+          Authorization: `Bearer ${session.accessToken}`,
+        },
+      });
+
+      if (!res.ok) {
+        console.error("Failed to fetch song preview URL");
+        return '';
+      }
+
+      const data = await res.json();
+      return data.preview_url || ''; // Return the preview URL of the song
+    } catch (error) {
+      console.error("Error fetching preview URL", error);
+      return '';
     }
+  };
 
-    return (data as any) || []
+  const previewUrl = fetchSongPreviewUrl(); // Call the fetch function
+
+  return previewUrl; // Return the preview URL of the song
 };
 
-export default getSongs;
+export default useLoadSongUrl;
