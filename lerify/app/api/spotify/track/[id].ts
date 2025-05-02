@@ -1,33 +1,35 @@
-// pages/api/spotify/track/[id].ts
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiRequest, NextApiResponse } from 'next'
 
-const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { id } = req.query;
-  const { authorization } = req.headers; // Get the authorization token from the request header
+const SPOTIFY_API = 'https://api.spotify.com/v1/tracks'
 
-  if (!authorization) {
-    return res.status(401).json({ error: "No authorization token provided" });
+// Function to fetch track by ID
+export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  const { id } = req.query
+  const accessToken = req.headers['authorization']?.split(' ')[1] // Get Bearer token from request headers
+
+  if (!accessToken) {
+    return res.status(401).json({ error: 'Authorization token is required' })
   }
-
-  const accessToken = authorization.split(" ")[1]; // Extract the token from the 'Bearer <token>' format
 
   try {
-    const response = await fetch(`https://api.spotify.com/v1/tracks/${id}`, {
+    // Fetch track data from Spotify API
+    const response = await fetch(`${SPOTIFY_API}/${id}`, {
       headers: {
-        Authorization: `Bearer ${accessToken}`, // Pass the access token in the request
+        Authorization: `Bearer ${accessToken}`,
       },
-    });
+    })
 
     if (!response.ok) {
-      return res.status(401).json({ error: "Invalid token or failed to fetch track" });
+      if (response.status === 401) {
+        return res.status(401).json({ error: 'Authorization token expired or invalid' })
+      }
+      return res.status(response.status).json({ error: 'Failed to fetch track' })
     }
 
-    const trackData = await response.json();
-    return res.status(200).json(trackData); // Send the track data back to the client
+    const data = await response.json()
+    res.status(200).json(data) // Return track data including preview_url
   } catch (error) {
-    console.error("Error fetching track data", error);
-    return res.status(500).json({ error: "Failed to fetch track data" });
+    console.error('Error fetching track:', error)
+    res.status(500).json({ error: 'Internal Server Error' })
   }
-};
-
-export default handler;
+}

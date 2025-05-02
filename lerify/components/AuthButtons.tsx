@@ -14,8 +14,8 @@ export default function LoginButton() {
   };
 
   if (session) {
-    return <button className="text-white" onClick={handleLogout}>Sign Out</button>;
+    return <button className="text-white hover:text-accent-color duration-300" onClick={handleLogout}>Sign Out</button>;
   }
 
-  return <button className="text-white" onClick={handleLogin}>Sign In with Spotify</button>;
+  return <button className="text-white hover:text-accent-color duration-300" onClick={handleLogin}>Sign In with Spotify</button>;
 }

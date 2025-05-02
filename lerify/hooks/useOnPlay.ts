@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from "react";
 import { useSession } from "next-auth/react"; 
-import { Song } from "@/types";
+import { SpotifySong } from "@/types/index"; // Ensure SpotifySong type matches your structure
 
-const useOnPlay = (songs: Song[]) => {
+const useOnPlay = (songs: SpotifySong[]) => {
   const [currentAudio, setCurrentAudio] = useState<HTMLAudioElement | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const { data: session } = useSession(); 
+  const { data: session } = useSession();
 
   const fetchPreviewUrl = async (id: string): Promise<string | null> => {
     if (!session?.accessToken) {
@@ -14,19 +14,27 @@ const useOnPlay = (songs: Song[]) => {
       return null;
     }
   
+    console.log("Access Token:", session?.accessToken);
+    console.log("Fetching track ID:", id);
+  
     try {
       const res = await fetch(`/api/spotify/track/${id}`, {
         headers: {
-          Authorization: `Bearer ${session.accessToken}`, // Ensure the token is passed correctly
+          Authorization: `Bearer ${session.accessToken}`,
         },
       });
   
       if (!res.ok) {
         console.error("Failed to fetch track:", res.status);
+        if (res.status === 401) {
+          alert("Unauthorized access. Please log in again.");
+        }
         return null;
       }
   
       const data = await res.json();
+      console.log("Track data:", data);
+  
       return data.preview_url || null;
     } catch (error) {
       console.error("Failed to fetch preview URL", error);
@@ -36,7 +44,7 @@ const useOnPlay = (songs: Song[]) => {
   
 
   const onPlay = async (id: string) => {
-    let song = songs.find((s) => s.id === id);
+    const song = songs.find((s) => s.id === id);
     if (!song) {
       alert("Song not found.");
       return;
@@ -79,7 +87,6 @@ const useOnPlay = (songs: Song[]) => {
       }
     };
   }, []);
-
 
   return { onPlay, isLoading }; // ✅ Correct return here
 };

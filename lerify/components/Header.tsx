@@ -26,6 +26,7 @@ import { MdAccountCircle, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import toast from "react-hot-toast";
 import SearchInput from "./Search/SearchInput";
 import Logo from "./Logo";
+import AuthButtons from "./AuthButtons";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -123,28 +124,15 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                   </MenuItem>
                   <MenuSeparator className="h-px bg-black" />
                   <MenuItem as="div">
-                    <Button
-                      className="flex gap-3 text-lg items-center justify-center"
-                      onClick={handleLogout}
-                    >
-                      {" "}
-                      Log out <IoLogOut size={25} />
-                    </Button>
+                  <AuthButtons />
                   </MenuItem>
                 </MenuItems>
               </Menu>
             </div>
           ) : (
-            <>
-              <Button
-                onClick={authModal.onOpen}
-                className="flex items-center rounded-2xl px-4 text-white font-bold gap-2 py-8 text-2xl"
-              >
-                {" "}
-                Log in
-                <MdAccountCircle size={30} />
-              </Button>
-            </>
+            <div className="bg-bg-color p-3 rounded-xl hover:text-accent-color">
+              <AuthButtons />
+            </div>
           )}
         </div>
       </div>

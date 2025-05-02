@@ -5,7 +5,7 @@ export interface Song {
     title: string;
     author: string;
     imageUrl: string;
-    previewUrl: string | null;
+    previewUrl: string;
 }
 
 export interface UserDetails {

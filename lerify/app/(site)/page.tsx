@@ -1,20 +1,14 @@
-import getSongs from "@/actions/getSongs";
 import Header from "@/components/Header";
 import ListItem from "@/components/ListItem";
 import PageContent from "@/components/PageContent";
-import AuthButtons from "@/components/AuthButtons"; // <-- import your auth buttons!
-import TestSession from "@/components/TestSession";
 import { fetchTopSpotifyTracks } from "@/actions/getSongsSpotify";
-
-
+import TestSession from "@/components/TestSession";
 
 export const revalidate = 0;
 
 export default async function Home() {
-  // const songs = await getSongs();
   const songs = await fetchTopSpotifyTracks();
 
-  
   return (
     <div className="bg-black rounded-xl h-full w-full overflow-hidden overflow-y-auto">
       <Header>
@@ -23,16 +17,15 @@ export default async function Home() {
             Home
           </div>
         </div>
-        
+
         <div className="flex items-center gap-4">
           <ListItem image="/images/like.png" name="Liked" href="liked" />
-          <AuthButtons /> {/* <-- Add the Auth button here */}
         </div>
       </Header>
 
       <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between flex-col">
-          <h1 className="text-white font-black text-3xl mb-6">Newest songs</h1>
+          <h1 className="text-white font-black text-3xl mb-6">Popular songs</h1>
           <div className="w-full">
             <PageContent songs={songs} />
             <TestSession/>

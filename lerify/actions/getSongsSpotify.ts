@@ -37,7 +37,7 @@ export async function fetchTopSpotifyTracks(): Promise<Song[]> {
     try {
         const accessToken = await getSpotifyAccessToken();
 
-        const response = await axios.get(`${SPOTIFY_ENDPOINT}/browse/new-releases?limit=12`, {
+        const response = await axios.get(`${SPOTIFY_ENDPOINT}/browse/new-releases`, {
             headers: {
                 Authorization: `Bearer ${accessToken}`,
             },
@@ -50,10 +50,11 @@ export async function fetchTopSpotifyTracks(): Promise<Song[]> {
             title: album.name,
             author: album.artists[0].name,
             imageUrl: album.images[0]?.url || '',
-            previewUrl: null,
+            previewUrl: album.preview_url || '', // Use the correct preview URL if available
         }));
     } catch (error) {
         console.error('Error fetching Spotify tracks:', error);
-        return []; // or throw error depending on your needs
+        return []; // Or throw error depending on your needs
     }
 }
+

@@ -1,4 +1,3 @@
-// types/next-auth.d.ts
 import NextAuth from "next-auth";
 
 declare module "next-auth" {
@@ -6,7 +5,7 @@ declare module "next-auth" {
     accessToken?: string;
   }
 
-  interface Token {
+  interface JWT {
     accessToken?: string;
   }
 }
