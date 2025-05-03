@@ -1,7 +1,5 @@
-"use client";
-
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import { Song } from "@/types";
-import React, { useEffect, useState, useCallback } from "react";
 import PlayerItem from "./PlayerItem";
 import { IoPlaySkipBack, IoPlaySkipForward } from "react-icons/io5";
 import { FaPause, FaPlay } from "react-icons/fa";
@@ -20,40 +18,50 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   const [volume, setVolume] = useState(
     Number(localStorage.getItem("volume")) || 50
   );
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   const Icon = isPlaying ? FaPause : FaPlay;
 
-  const [play, { pause, sound }] = useSound(songUrl, {
+  const [play, { pause, stop, sound }] = useSound(songUrl, {
     volume: volume / 100,
+    format: ["mp3"],
     onplay: () => setIsPlaying(true),
+    onpause: () => setIsPlaying(false),
     onend: () => {
       setIsPlaying(false);
       onPlayNext();
     },
-    onpause: () => setIsPlaying(false),
-    format: ["mp3"],
   });
 
+  // Auto-play when songUrl changes
   useEffect(() => {
-    sound?.play();
-    return () => {
-      sound?.unload();
-    };
-  }, [sound]);
+    if (sound) {
+      sound.play();
+      setCurrentTime(0);
+    }
 
+    return () => {
+      stop(); // Stop the previous sound when component unmounts or song changes
+    };
+  }, [songUrl, sound, stop]);
+
+  // Update volume
   useEffect(() => {
+    localStorage.setItem("volume", volume.toString());
     if (sound) {
       sound.volume(volume / 100);
     }
   }, [volume, sound]);
 
   const handlePlay = useCallback(() => {
-    if (!isPlaying) {
-      play();
-    } else {
+    if (!sound) return;
+    if (isPlaying) {
       pause();
+    } else {
+      play();
     }
-  }, [isPlaying, play, pause]);
+  }, [isPlaying, pause, play, sound]);
 
   const onPlayNext = useCallback(() => {
     if (player.ids.length === 0) return;
@@ -70,11 +78,38 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
     player.setId(previousSong);
   }, [player]);
 
-  // Keyboard Controls
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newTime = parseFloat(e.target.value);
+    if (sound) {
+      sound.seek(newTime);
+      setCurrentTime(newTime);
+    }
+  };
+
+  useEffect(() => {
+    let animationFrameId: number;
+
+    const updateProgress = () => {
+      if (sound && isPlaying) {
+        const time = sound.seek() as number;
+        setCurrentTime(time);
+        setDuration(sound.duration() || 0);
+        animationFrameId = requestAnimationFrame(updateProgress);
+      }
+    };
+
+    if (isPlaying) {
+      animationFrameId = requestAnimationFrame(updateProgress);
+    }
+
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [isPlaying, sound]);
+
+  // Keyboard controls
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === " " && !event.ctrlKey && !event.metaKey) {
-        event.preventDefault(); // Prevent page scrolling
+      if (event.key === " " && event.ctrlKey && !event.metaKey) {
+        event.preventDefault();
         handlePlay();
       }
       if (event.ctrlKey && event.key === "ArrowRight") {
@@ -91,30 +126,53 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
     };
   }, [handlePlay, onPlayNext, onPlayPrevious]);
 
+  const formatTime = (time: number): string => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 w-full h-full items-center">
+    <div className="grid grid-cols-2 md:grid-cols-3 w-full h-full items-center px-4">
       <div className="flex w-full">
-        <div className="SongInfo">
-          <PlayerItem data={song} />
-        </div>
+        <PlayerItem data={song} />
       </div>
-      <div className="Play flex items-center gap-3 justify-center">
-        <IoPlaySkipBack
-          onClick={onPlayPrevious}
-          size={25}
-          className="cursor-pointer hover:text-accent-color"
-        />
-        <div
-          onClick={handlePlay}
-          className="cursor-pointer text-black hover:bg-accent-color rounded-full bg-white p-3"
-        >
-          <Icon size={20} className={isPlaying ? "pl-0" : "pl-[2px]"} />
+
+      <div className="flex flex-col items-center w-full">
+        <div className="flex items-center gap-3 justify-center">
+          <IoPlaySkipBack
+            onClick={onPlayPrevious}
+            size={25}
+            className="cursor-pointer hover:text-accent-color duration-300"
+          />
+          <div
+            onClick={handlePlay}
+            className="cursor-pointer text-black hover:bg-accent-color rounded-full bg-white p-3 duration-300"
+          >
+            <Icon size={20} className={isPlaying ? "pl-0" : "pl-[2px]"} />
+          </div>
+          <IoPlaySkipForward
+            onClick={onPlayNext}
+            size={25}
+            className="cursor-pointer hover:text-accent-color duration-300"
+          />
         </div>
-        <IoPlaySkipForward
-          onClick={onPlayNext}
-          size={25}
-          className="cursor-pointer hover:text-accent-color"
-        />
+
+        <div className="w-full mt-2">
+          <div className="flex items-center gap-5 justify-between text-sm text-white">
+            <span>{formatTime(currentTime)}</span>
+            <input
+              type="range"
+              min={0}
+              max={duration}
+              step="0.1"
+              value={currentTime}
+              onChange={handleSeek}
+              className="w-full cursor-pointer rounded-full hover:bg-accent-color appearance-none h-[4px] transition-all duration-300 accent-white"
+            />
+            <span>{formatTime(duration)}</span>
+          </div>
+        </div>
       </div>
 
       <div className="flex justify-end pr-6">

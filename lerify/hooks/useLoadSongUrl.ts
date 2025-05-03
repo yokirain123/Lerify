@@ -1,19 +1,17 @@
-import { Song } from "@/types"
-import { useSupabaseClient } from "@supabase/auth-helpers-react";
+// utils/loadSongUrl.ts
+import { Song } from "@/types";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 
-const useLoadSongUrl = (song: Song) => {
-    const supabaseClient = useSupabaseClient()
+const loadSongUrl = async (song: Song): Promise<string> => {
+  const supabase = createClientComponentClient();
 
-    if (!song) {
-        return ''
-    }
+  if (!song) return "";
 
-    const {data: songData} = supabaseClient
-    .storage
-    .from('songs')
-    .getPublicUrl(song.song_path)
+  const { data: songData } = supabase.storage
+    .from("songs")
+    .getPublicUrl(song.song_path);
 
-    return songData.publicUrl
-}
+  return songData.publicUrl;
+};
 
-export default useLoadSongUrl
+export default loadSongUrl;
