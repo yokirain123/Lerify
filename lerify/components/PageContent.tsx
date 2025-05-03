@@ -9,13 +9,13 @@ interface PageContentProps {
 }
 
 const PageContent: React.FC<PageContentProps> = ({ songs }) => {
-  const onPlay = useOnPlay(songs);
-  
+  const onPlay = useOnPlay(songs); // ✅ Pass songs as required by the hook
+
   if (songs.length === 0) {
     return (
-        <div className="text-white">
-            no songs womp womp
-        </div>
+      <div className="text-white">
+        no songs womp womp
+      </div>
     );
   }
 
@@ -24,7 +24,7 @@ const PageContent: React.FC<PageContentProps> = ({ songs }) => {
       {songs.map((item) => (
         <SongItem
           key={item.id}
-          onClick={(id: string) => onPlay(id)}
+          onClick={() => onPlay(item.id)} // ✅ Now onPlay works correctly
           data={item}
         />
       ))}

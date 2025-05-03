@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from "react";
 import Modal from "./Modal";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
@@ -18,11 +16,8 @@ const UploadModal = () => {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
   const { user } = useUser();
   const supabaseClient = useSupabaseClient();
-
   const router = useRouter();
-
   const uploadModal = useUploadModal();
-
   const { register, handleSubmit, reset } = useForm<FieldValues>({
     defaultValues: {
       author: "",
@@ -55,7 +50,7 @@ const UploadModal = () => {
 
       const uniqueID = uniqid();
 
-      //Загрузить пісню
+      // Upload the song
       const { data: songData, error: songError } = await supabaseClient.storage
         .from("songs")
         .upload(`song-${values.title}-${uniqueID}`, songFile, {
@@ -67,41 +62,37 @@ const UploadModal = () => {
         return toast.error("Failed song upload");
       }
 
-      //Загрузить пісню
-      const { data: imageData, error: imageError } =
-        await supabaseClient.storage
-          .from("images")
-          .upload(`images-${values.title}-${uniqueID}`, imageFile, {
-            cacheControl: "3600",
-            upsert: false,
-          });
+      // Upload the image
+      const { data: imageData, error: imageError } = await supabaseClient.storage
+        .from("images")
+        .upload(`images-${values.title}-${uniqueID}`, imageFile, {
+          cacheControl: "3600",
+          upsert: false,
+        });
       if (imageError) {
         setIsLoading(false);
         return toast.error("Failed image upload");
       }
 
-      const  {
-        error: supabaseError
-      } = await supabaseClient.from('songs').insert({
+      // Insert data into database
+      const { error: supabaseError } = await supabaseClient.from("songs").insert({
         user_id: user.id,
         title: values.title,
         author: values.author,
         image_path: imageData.path,
-        song_path: songData.path  
-      })
+        song_path: songData.path,
+      });
 
       if (supabaseError) {
-        setIsLoading(false)
-        return toast.error(supabaseError.message)
+        setIsLoading(false);
+        return toast.error(supabaseError.message);
       }
-      
 
       router.refresh();
       setIsLoading(false);
-      toast.success('Song created!');
+      toast.success("Song created!");
       reset();
       uploadModal.onClose();
-
     } catch (error) {
       toast.error("Something went wrong");
     } finally {
@@ -173,6 +164,15 @@ const UploadModal = () => {
             />
           </li>
         </ul>
+
+        {/* Display loading text or spinner when uploading */}
+        {isLoading && (
+          <div className="flex justify-center items-center mt-4 text-center">
+            <div className="loader"></div>
+            <span className="ml-2">Uploading, please wait...</span>
+          </div>
+        )}
+
         <div className="w-full border-[#14180c] border-small my-3"></div>
         <Button
           className="rounded-xl border-accent-color border-2 font-bold p-6 flex items-center justify-center"
