@@ -1,6 +1,6 @@
 "use client"
 
-import { UserDetails, Subscription } from "@/types";
+import { UserDetails } from "@/types";
 import {
   useSessionContext,
   useUser as useSupaUser,
@@ -13,7 +13,6 @@ type UserContextType = {
   user: User | null;
   userDetails: UserDetails | null;
   isLoading: boolean;
-  subscription: Subscription | null;
 };
 
 export const UserContext = createContext<UserContextType | undefined>(
@@ -34,7 +33,6 @@ export const MyUserContextProvider = (props: Props) => {
   const accessToken = session?.access_token ?? null;
   const [isLoadingData, setIsLoadingData] = useState(false);
   const [userDetails, setUserDetails] = useState<UserDetails | null>(null);
-  const [subscription, setSubscription] = useState<Subscription | null>(null);
 
   const getUserDetails = () => supabase.from("users").select("*").single();
   const getSubscriptions = () =>
@@ -45,7 +43,7 @@ export const MyUserContextProvider = (props: Props) => {
       .single();
 
   useEffect(() => {
-    if (user && !isLoadingData && !userDetails && !subscription) {
+    if (user && !isLoadingData && !userDetails) {
       setIsLoadingData(true);
 
       Promise.allSettled([getUserDetails(), getSubscriptions()]).then(
@@ -57,16 +55,11 @@ export const MyUserContextProvider = (props: Props) => {
             setUserDetails(userDetailsPromise.value.data as UserDetails);
           }
 
-          if (subscriptionPromise.status === "fulfilled") {
-            setSubscription(subscriptionPromise.value.data as Subscription);
-          }
-
           setIsLoadingData(false);
         }
       );
     } else if (!user && !isLoadingUser && !isLoadingData) {
       setUserDetails(null);
-      setSubscription(null);
     }
   }, [user, isLoadingUser]);
 
@@ -75,7 +68,6 @@ export const MyUserContextProvider = (props: Props) => {
     user,
     userDetails,
     isLoading: isLoadingUser || isLoadingData,
-    subscription,
   };
 
   return <UserContext.Provider value={value} {...props} />
