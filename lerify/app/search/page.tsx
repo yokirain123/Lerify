@@ -21,7 +21,11 @@ const Search = async ({ searchParams }: SearchProps) => {
       </Header>
 
       <div className="p-6 flex flex-col gap-6 pb-[120px]">
+      {query ? (
         <SearchContent songs={songs} />
+      ) : (
+        <p className="text-white">Type something to search for songs.</p>
+      )}
       </div>
     </div>
   );

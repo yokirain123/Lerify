@@ -25,7 +25,6 @@ import toast from "react-hot-toast";
 import Logo from "./Logo";
 import SearchInput from "../Search/SearchInput";
 import Button from "./Button";
-import Image from "next/image";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -100,14 +99,13 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           </button>
         </div>
 
-        {/* User Menu / Login Button */}
         <div className="flex items-center gap-x-1 text-lg">
           {user ? (
             <div className="bg-bg-color p-3 rounded-xl w-[210px]">
               <Menu>
                 <MenuButton className="text-white hover:text-[var(--accent-color)] transition duration-300 flex items-center gap-3 justify-between">
                   {user?.user_metadata?.avatar_url ? (
-                    <Image
+                    <img
                       src={user.user_metadata.avatar_url}
                       alt="User Avatar"
                       className="w-12 h-12 rounded-full object-cover border-2 border-[var(--accent-color)]"
@@ -158,7 +156,6 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
         </div>
       </div>
 
-      {/* Mobile Search Input Dropdown */}
       {showMobileSearch && (
         <div className="md:hidden px-4 py-2 mt-2 bg-black z-10">
           <SearchInput />
