@@ -35,7 +35,9 @@ function Liked() {
 
   return (
     <div className="w-full">
-      <Header />
+      <Header>
+        <div className="text-black">Liked</div>
+      </Header>
       <div className="flex flex-col sm:flex-row items-center gap-5 px-4 sm:px-10 my-5">
         <div className="relative w-40 h-40">
           <Image
