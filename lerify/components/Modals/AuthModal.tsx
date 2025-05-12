@@ -22,9 +22,9 @@ const AuthModal = () => {
     if (session) {
       console.log("User Session:", session);
       if (!session.user?.email) {
-        console.error("⚠️ No email received from Spotify! Supabase requires an email.");
+        console.error("No email received from Spotify! Supabase requires an email.");
       }
-      onClose();  // Close modal first
+      onClose();
       router.refresh();
     }
   }, [session, router, onClose]);
@@ -38,9 +38,7 @@ const AuthModal = () => {
       onClose();
     }
   };
-  
 
-  //Styles for auth
   const radii = ["20px", "40px", "20px"] as const;
   const [borderRadius] = useState(radii[0] as string);
   const [borderRadiusAlt] = useState(radii[1] as string);

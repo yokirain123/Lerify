@@ -19,7 +19,6 @@ const Library = () => {
                 </div>
                 <FaPlus onClick={onClick} className='cursor-pointer text-[--inactive-text] hover:text-[var(--accent-color)] transition duration-300'/>
             </div>
-            {/* <div className="flex flex-col gap-y-2 mt-4 px-3">list of songs</div> */}
         </div>
     );
 }

@@ -11,7 +11,7 @@ interface MediaItemProps {
 }
 
 const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
-  const imageUrl = useLoadImage(data) || "/placeholder.png"; // Fallback if URL is null
+  const imageUrl = useLoadImage(data) || "/placeholder.png";
   const [isHovered, setIsHovered] = useState(false);
 
   const handleClick = () => {
@@ -27,7 +27,6 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Section */}
       <div className="relative flex-[0_0_100px] h-full">
         <Image
           className="rounded-l-2xl object-cover h-full w-full"
@@ -36,7 +35,6 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
           fill
           priority
         />
-        {/* Play Button Overlay */}
         <div
           className={`absolute inset-0 flex justify-center items-center bg-black/60 backdrop-blur-sm rounded-l-2xl transition-all duration-300 ease-in-out ${
             isHovered ? "opacity-100" : "opacity-0"
@@ -45,8 +43,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
           <FaPlay size={30} className="text-white" />
         </div>
       </div>
-
-      {/* Song Details */}
+      
       <div className="flex flex-col justify-center px-4 py-2 text-white flex-grow min-w-0">
         <p className="text-lg font-bold text-accent-color truncate">
           {data.title}
@@ -54,7 +51,6 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
         <p className="text-sm text-gray-300 truncate">{data.author}</p>
       </div>
 
-      {/* Like Button Positioned to the Right */}
       <div className="pr-4 flex items-center">
         <LikeButton songId={data.id} />
       </div>

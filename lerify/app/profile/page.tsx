@@ -8,7 +8,6 @@ import { Song } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import SongItem from "@/components/SongItem";
 import useOnPlay from "@/hooks/useOnPlay";
-import Image from "next/image";
 
 const Profile = () => {
   const { user } = useUser();

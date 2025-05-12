@@ -160,7 +160,7 @@ const UploadModal = () => {
               type="file"
               disabled={isLoading}
               {...register("image", { required: true })}
-              accept="image/*" // Set the selected image
+              accept="image/*"
             />
           </li>
         </ul>

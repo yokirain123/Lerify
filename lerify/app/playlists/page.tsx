@@ -21,7 +21,7 @@ const Page: FC<PlaylistsProps> = () => {
       return authModal.onOpen();
     }
 
-    uploadModal.onOpen(); // Open upload modal when the user is authenticated
+    uploadModal.onOpen();
   };
 
   const pathname = usePathname();

@@ -11,7 +11,7 @@ interface MediaItemProps {
 }
 
 const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
-  const imageUrl = useLoadImage(data) || "/placeholder.png"; // Fallback if URL is null
+  const imageUrl = useLoadImage(data) || "/placeholder.png";
 
   const handleClick = () => {
     if (onClick) {
@@ -24,7 +24,6 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
       className="flex w-full items-center h-[100px] cursor-pointer relative shadow-md hover:shadow-lg transition-all duration-300"
       onClick={handleClick}
     >
-      {/* Image Section */}
       <div className="relative flex-[0_0_100px] h-full">
         <Image
           className="object-cover h-full w-full"
@@ -35,7 +34,6 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
         />
       </div>
 
-      {/* Song Details */}
       <div className="flex flex-col justify-center px-4 py-2 text-white">
         <p className="font-bold text-accent-color truncate whitespace-nowrap">
           {data.title}
@@ -43,7 +41,6 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
         <p className="text-sm text-gray-300 truncate">{data.author}</p>
       </div>
 
-      {/* Like Button Positioned to the Right */}
       <div className=" flex items-center">
         <LikeButton songId={data.id} />
       </div>

@@ -78,12 +78,10 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           </button>
         </div>
 
-        {/* Desktop Search */}
         <div className="hidden md:block w-full ">
           <SearchInput />
         </div>
 
-        {/* Mobile Nav Buttons */}
         <div className="flex md:hidden gap-x-2 items-center">
           <button>
             <HiHome
