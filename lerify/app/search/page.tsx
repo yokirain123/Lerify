@@ -2,14 +2,12 @@ import getSongsByQuery from "@/actions/getSongsByQuery";
 import Header from "@/components/UI/Header";
 import SearchContent from "@/components/Search/SearchContent";
 
-interface PageProps {
-  searchParams?: {
-    query?: string;
-  };
-}
+type Props = {
+  searchParams?: Record<string, string | string[] | undefined>;
+};
 
-const Search = async ({ searchParams }: PageProps) => {
-  const query = searchParams?.query ?? "";
+const Search = async ({ searchParams }: Props) => {
+  const query = typeof searchParams?.query === "string" ? searchParams.query : "";
   const songs = await getSongsByQuery(query);
 
   return (
@@ -24,7 +22,7 @@ const Search = async ({ searchParams }: PageProps) => {
         {query ? (
           <SearchContent songs={songs} />
         ) : (
-          <p className="text-white text-xl font-bold">What does on your mind now?</p>
+          <p className="text-white text-xl font-bold">What’s on your mind now?</p>
         )}
       </div>
     </div>
