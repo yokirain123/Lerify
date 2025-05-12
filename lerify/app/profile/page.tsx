@@ -1,8 +1,53 @@
-import Header from "@/components/Header";
-import React from "react";
-import { RxAvatar } from "react-icons/rx";
+"use client";
+
+import React, { useEffect, useState } from "react";
+import { MdAccountCircle } from "react-icons/md";
+import Header from "@/components/UI/Header";
+import { useUser } from "@/hooks/useUser";
+import { Song } from "@/types";
+import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import SongItem from "@/components/SongItem";
+import useOnPlay from "@/hooks/useOnPlay";
 
 const Profile = () => {
+  const { user } = useUser();
+  const [likedSongs, setLikedSongs] = useState<Song[]>([]);
+  const [loading, setLoading] = useState(true);
+  const userName = user?.user_metadata?.user_name || "Unknown User";
+
+  useEffect(() => {
+    const fetchLikedSongs = async () => {
+      setLoading(true);
+      const supabase = createClientComponentClient();
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+
+      const { data, error } = await supabase
+        .from("liked_songs")
+        .select("*, songs(*)")
+        .eq("user_id", session?.user?.id)
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Failed to fetch liked songs:", error.message);
+      }
+
+      if (data) {
+        setLikedSongs(data.map((item) => item.songs));
+      }
+
+      setLoading(false);
+    };
+
+    if (user) {
+      fetchLikedSongs();
+    }
+  }, [user]);
+
+  const onPlay = useOnPlay(likedSongs);
+
+
   return (
     <div>
       <Header>
@@ -13,10 +58,45 @@ const Profile = () => {
         </div>
       </Header>
 
-      <div className="px-10 text-white flex items-center">
-        <RxAvatar size={200}/>
-        <p className="text-5xl p-3">Username</p>
+<div className="pl-6">
+      <div className="px-10 text-white text-4xl flex flex-col gap-6 bg-bg-color p-6 rounded-xl">
+        <div className="flex items-center gap-6">
+          {user?.user_metadata?.avatar_url ? (
+            <img
+              src={user.user_metadata.avatar_url}
+              alt="User Avatar"
+              className="w-[120px] h-[120px] rounded-full object-cover"
+            />
+          ) : (
+            <MdAccountCircle
+              className="border-accent-color border-3 rounded-full"
+              size={120}
+            />
+          )}
+          <div className="flex flex-col gap-3">
+            <span className="text-7xl text-accent-color font-bold">
+              {userName}
+            </span>
+            <div className="text-xl">
+              Liked songs: {loading ? "Loading..." : likedSongs.length}
+            </div>
+          </div>
+        </div>
       </div>
+      {!loading && likedSongs.length > 0 && (
+        <div className="px-10 mt-6 pb-[150px]">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6">
+            {likedSongs.map((song) => (
+              <SongItem
+                key={song.id}
+                onClick={() => onPlay(song.id)}
+                data={song}
+              />
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
     </div>
   );
 };

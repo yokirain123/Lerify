@@ -3,7 +3,7 @@
 import qs from "query-string";
 import { useRouter } from "next/navigation";
 import { useState, useEffect, KeyboardEvent } from "react";
-import Input from "../Input";
+import Input from "../UI/Input";
 
 const SearchInput = () => {
     const router = useRouter();
@@ -31,14 +31,15 @@ const SearchInput = () => {
 
     const handleSearchSubmit = () => {
         if (value.trim()) {
-            const query = { title: value };
-            const url = qs.stringifyUrl({
-                url: '/search',
-                query: query,
-            });
-            router.push(url);
+          const query = { query: value };
+          const url = qs.stringifyUrl({
+            url: '/search',
+            query: query,
+          });
+          router.push(url);
         }
-    };
+      };
+      
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
         if (event.key === 'Enter') {

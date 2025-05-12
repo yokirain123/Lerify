@@ -3,7 +3,7 @@ import { Song } from "@/types";
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaPlay } from "react-icons/fa6";
-import LikeButton from "../LikeButton";
+import LikeButton from "../UI/LikeButton";
 
 interface MediaItemProps {
   data: Song;

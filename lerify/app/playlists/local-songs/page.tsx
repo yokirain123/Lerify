@@ -1,5 +1,5 @@
 import getSongs from "@/actions/getSongs";
-import Header from "@/components/Header";
+import Header from "@/components/UI/Header";
 import React from "react";
 import LocalContent from "./components/LocalContent";
 

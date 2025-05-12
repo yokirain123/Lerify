@@ -1,4 +1,3 @@
-// components/SearchContent.tsx
 "use client";
 
 import { Song } from "@/types";
@@ -10,14 +9,14 @@ interface SearchContentProps {
 }
 
 const SearchContent: React.FC<SearchContentProps> = ({ songs }) => {
-  const onPlay = useOnPlay(songs); // This hook can be used for managing playback logic
+  const onPlay = useOnPlay(songs);
 
   if (songs.length === 0) {
-    return <div className="text-white">No song found</div>;
+    return <div className="text-white text-center mt-10">No song found</div>;
   }
 
   return (
-    <div className="flex gap-8 justify-center">
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8 px-4 sm:px-6 md:px-10">
       {songs.map((song) => (
         <div key={song.id}>
           <SearchItem onClick={(id: string) => onPlay(id)} data={song} />

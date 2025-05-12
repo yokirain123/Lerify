@@ -5,7 +5,7 @@ import { Song } from "@/types";
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaPlay } from "react-icons/fa6";
-import LikeButton from "../LikeButton";
+import LikeButton from "../UI/LikeButton";
 
 interface SearchItemProps {
   data: Song;
@@ -13,48 +13,45 @@ interface SearchItemProps {
 }
 
 const SearchItem: React.FC<SearchItemProps> = ({ data, onClick }) => {
-  const imageUrl = useLoadImage(data) || "/placeholder.png"; // Fallback if URL is null
+  const imageUrl = useLoadImage(data) || "/placeholder.png";
   const [isHovered, setIsHovered] = useState(false);
+  const [isLiked, setIsLiked] = useState(false);
 
   const handleClick = () => {
-    if (onClick) {
+    if (onClick && !isLiked) {
       onClick(data.id);
     }
   };
 
   return (
     <div
-      className="flex w-[350px] h-[120px] bg-bg-color rounded-2xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all duration-300"
+      className="flex sm:flex-row flex-col w-full sm:max-w-[350px] h-auto sm:h-[120px] bg-bg-color rounded-2xl overflow-hidden cursor-pointer relative shadow-md hover:shadow-lg transition-all duration-300"
       onClick={handleClick}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Image Section */}
-      <div className="relative flex-shrink-0 w-[120px] h-full">
+      <div className="relative flex-shrink-0 w-full sm:w-[120px] h-[200px] sm:h-full">
         <Image
-          className="rounded-l-2xl object-cover h-full w-full"
+          className="object-cover h-full w-full sm:rounded-l-2xl rounded-t-2xl sm:rounded-t-none"
           src={imageUrl}
           alt={data.title || "No image available"}
           fill
           priority
         />
-        {/* Play Button Overlay */}
         <div
-          className={`absolute inset-0 flex justify-center items-center bg-black/60 backdrop-blur-sm rounded-l-2xl transition-all duration-300 ease-in-out ${
-            isHovered ? "opacity-100" : "opacity-0"
-          }`}
+          className={`absolute inset-0 flex justify-center items-center bg-black/60 backdrop-blur-sm transition-all duration-300 ease-in-out ${
+            isHovered && !isLiked ? "opacity-100" : "opacity-0"
+          } ${!isLiked && "sm:rounded-l-2xl rounded-t-2xl sm:rounded-t-none"}`}
         >
           <FaPlay size={30} className="text-white" />
         </div>
       </div>
-      
-      {/* Song Details */}
-      <div className="flex flex-col justify-center px-4 py-2 text-white flex-grow relative">
-        <p className="text-lg font-bold text-accent-color text-clip">{data.title}</p>
+
+      <div className="flex flex-col justify-center px-4 py-3 text-white flex-grow relative">
+        <p className="text-base sm:text-lg font-bold text-accent-color line-clamp-1">{data.title}</p>
         <p className="text-sm text-gray-300 truncate">{data.author}</p>
-        
-        {/* Like Button Positioned to the Right */}
-        <div className="absolute right-4 top-1/2 transform -translate-y-1/2">
+
+        <div className="absolute right-4 top-3 sm:top-1/2 sm:-translate-y-1/2">
           <LikeButton songId={data.id} />
         </div>
       </div>

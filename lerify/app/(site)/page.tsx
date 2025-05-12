@@ -1,5 +1,5 @@
 import getSongs from "@/actions/getSongs";
-import Header from "@/components/Header";
+import Header from "@/components/UI/Header";
 import ListItem from "@/components/ListItem";
 import PageContent from "@/components/PageContent";
 
@@ -20,7 +20,7 @@ export default async function Home() {
         <ListItem image="/images/like.png" name={"Liked"} href={"liked"} />
       </Header>
 
-      <div className="mt-2 mb-7 px-6 pb-[100px]">
+      <div className="mt-2 mb-7 px-6">
         <div className="flex justify-between flex-col">
           <h1 className="text-white font-black text-3xl mb-6">Newest songs</h1>
           <div className="w-full">

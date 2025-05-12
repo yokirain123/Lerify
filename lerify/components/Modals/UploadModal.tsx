@@ -4,8 +4,8 @@ import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import { useUser } from "@/hooks/useUser";
 import useUploadModal from "@/hooks/useUploadModal";
-import Input from "./Input";
-import Button from "./Button";
+import Input from "../UI/Input";
+import Button from "../UI/Button";
 import uniqid from "uniqid";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import { useRouter } from "next/navigation";
@@ -30,8 +30,8 @@ const UploadModal = () => {
   const onChange = (open: boolean) => {
     if (!open) {
       reset();
-      setSelectedSong(null); // Reset file display
-      setSelectedImage(null); // Reset file display
+      setSelectedSong(null);
+      setSelectedImage(null);
       uploadModal.onClose();
     }
   };
@@ -50,7 +50,6 @@ const UploadModal = () => {
 
       const uniqueID = uniqid();
 
-      // Upload the song
       const { data: songData, error: songError } = await supabaseClient.storage
         .from("songs")
         .upload(`song-${values.title}-${uniqueID}`, songFile, {
@@ -62,26 +61,27 @@ const UploadModal = () => {
         return toast.error("Failed song upload");
       }
 
-      // Upload the image
-      const { data: imageData, error: imageError } = await supabaseClient.storage
-        .from("images")
-        .upload(`images-${values.title}-${uniqueID}`, imageFile, {
-          cacheControl: "3600",
-          upsert: false,
-        });
+      const { data: imageData, error: imageError } =
+        await supabaseClient.storage
+          .from("images")
+          .upload(`images-${values.title}-${uniqueID}`, imageFile, {
+            cacheControl: "3600",
+            upsert: false,
+          });
       if (imageError) {
         setIsLoading(false);
         return toast.error("Failed image upload");
       }
 
-      // Insert data into database
-      const { error: supabaseError } = await supabaseClient.from("songs").insert({
-        user_id: user.id,
-        title: values.title,
-        author: values.author,
-        image_path: imageData.path,
-        song_path: songData.path,
-      });
+      const { error: supabaseError } = await supabaseClient
+        .from("songs")
+        .insert({
+          user_id: user.id,
+          title: values.title,
+          author: values.author,
+          image_path: imageData.path,
+          song_path: songData.path,
+        });
 
       if (supabaseError) {
         setIsLoading(false);
@@ -142,7 +142,7 @@ const UploadModal = () => {
               type="file"
               disabled={isLoading}
               {...register("song", { required: true })}
-              accept=".mp3" // Set the selected song
+              accept=".mp3"
             />
           </li>
           <li>
@@ -165,7 +165,6 @@ const UploadModal = () => {
           </li>
         </ul>
 
-        {/* Display loading text or spinner when uploading */}
         {isLoading && (
           <div className="flex justify-center items-center mt-4 text-center">
             <div className="loader"></div>

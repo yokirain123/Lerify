@@ -49,21 +49,6 @@ const AuthModal = () => {
   const [socialLayout, setSocialLayout] = useState<SocialLayout>(
     socialAlignments[0] satisfies SocialLayout
   );
-
-  const handleSpotifyLogin = async () => {
-    const { data, error } = await supabaseClient.auth.signInWithOAuth({
-      provider: "spotify",
-      options: {
-        redirectTo: "http://localhost:3000/auth/callback", // Adjust this if needed
-      },
-    });
-  
-    if (error) {
-      console.error("Spotify login error:", error.message);
-    } else {
-      console.log("Spotify login success:", data);
-    }
-  };
   
   return (
     <Modal

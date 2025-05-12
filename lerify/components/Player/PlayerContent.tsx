@@ -3,9 +3,11 @@ import { Song } from "@/types";
 import PlayerItem from "./PlayerItem";
 import { IoPlaySkipBack, IoPlaySkipForward } from "react-icons/io5";
 import { FaPause, FaPlay } from "react-icons/fa";
+import { PiShuffleFill } from "react-icons/pi";
 import VolumeControl from "./VolumeControl";
 import useSound from "use-sound";
 import usePlayer from "@/hooks/usePlayer";
+import { LuRepeat1, LuRepeat } from "react-icons/lu";
 
 interface PlayerContentProps {
   song: Song;
@@ -20,6 +22,14 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
   );
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
+  const [isShuffling, setIsShuffling] = useState(() => {
+    return localStorage.getItem("isShuffling") === "true";
+  });
+
+  type RepeatMode = "off" | "all" | "one";
+  const [repeatMode, setRepeatMode] = useState<RepeatMode>(() => {
+    return (localStorage.getItem("repeatMode") as RepeatMode) || "off";
+  });
 
   const Icon = isPlaying ? FaPause : FaPlay;
 
@@ -29,24 +39,34 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
     onplay: () => setIsPlaying(true),
     onpause: () => setIsPlaying(false),
     onend: () => {
-      setIsPlaying(false);
-      onPlayNext();
-    },
+  if (repeatMode === "one") {
+    sound?.stop();
+    sound?.play();
+  } else {
+    onPlayNext();
+  }
+},
+
   });
 
-  // Auto-play when songUrl changes
+  useEffect(() => {
+    localStorage.setItem("isShuffling", String(isShuffling));
+  }, [isShuffling]);
+
+  useEffect(() => {
+    localStorage.setItem("repeatMode", repeatMode);
+  }, [repeatMode]);
+
   useEffect(() => {
     if (sound) {
       sound.play();
       setCurrentTime(0);
     }
-
     return () => {
-      stop(); // Stop the previous sound when component unmounts or song changes
+      stop();
     };
   }, [songUrl, sound, stop]);
 
-  // Update volume
   useEffect(() => {
     localStorage.setItem("volume", volume.toString());
     if (sound) {
@@ -56,19 +76,20 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
 
   const handlePlay = useCallback(() => {
     if (!sound) return;
-    if (isPlaying) {
-      pause();
-    } else {
-      play();
-    }
+    isPlaying ? pause() : play();
   }, [isPlaying, pause, play, sound]);
 
   const onPlayNext = useCallback(() => {
     if (player.ids.length === 0) return;
-    const currentIndex = player.ids.findIndex((id) => id === player.activeId);
-    const nextSong = player.ids[currentIndex + 1] ?? player.ids[0];
-    player.setId(nextSong);
-  }, [player]);
+    if (isShuffling) {
+      const randomIndex = Math.floor(Math.random() * player.ids.length);
+      player.setId(player.ids[randomIndex]);
+    } else {
+      const currentIndex = player.ids.findIndex((id) => id === player.activeId);
+      const nextSong = player.ids[currentIndex + 1] ?? player.ids[0];
+      player.setId(nextSong);
+    }
+  }, [player, isShuffling]);
 
   const onPlayPrevious = useCallback(() => {
     if (player.ids.length === 0) return;
@@ -84,6 +105,12 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
       sound.seek(newTime);
       setCurrentTime(newTime);
     }
+  };
+
+  const handleRepeatToggle = () => {
+    setRepeatMode((prev) =>
+      prev === "off" ? "all" : prev === "all" ? "one" : "off"
+    );
   };
 
   useEffect(() => {
@@ -105,25 +132,18 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
     return () => cancelAnimationFrame(animationFrameId);
   }, [isPlaying, sound]);
 
-  // Keyboard controls
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === " " && event.ctrlKey && !event.metaKey) {
         event.preventDefault();
         handlePlay();
       }
-      if (event.ctrlKey && event.key === "ArrowRight") {
-        onPlayNext();
-      }
-      if (event.ctrlKey && event.key === "ArrowLeft") {
-        onPlayPrevious();
-      }
+      if (event.ctrlKey && event.key === "ArrowRight") onPlayNext();
+      if (event.ctrlKey && event.key === "ArrowLeft") onPlayPrevious();
     };
 
     window.addEventListener("keydown", handleKeyDown);
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [handlePlay, onPlayNext, onPlayPrevious]);
 
   const formatTime = (time: number): string => {
@@ -138,8 +158,15 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
         <PlayerItem data={song} />
       </div>
 
-      <div className="flex flex-col items-center w-full">
+      <div className="hidden md:flex flex-col items-center w-full">
         <div className="flex items-center gap-3 justify-center">
+          <PiShuffleFill
+            onClick={() => setIsShuffling(!isShuffling)}
+            size={20}
+            className={`cursor-pointer hover:text-accent-color duration-300 ${
+              isShuffling ? "text-accent-color" : ""
+            }`}
+          />
           <IoPlaySkipBack
             onClick={onPlayPrevious}
             size={25}
@@ -156,6 +183,18 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
             size={25}
             className="cursor-pointer hover:text-accent-color duration-300"
           />
+          <button
+            onClick={handleRepeatToggle}
+            className="text-white hover:text-accent-color transition"
+          >
+            {repeatMode === "off" && <LuRepeat className="" />}
+            {repeatMode === "all" && <LuRepeat className="text-accent-color" />}
+            {repeatMode === "one" && (
+              <LuRepeat1 className="text-accent-color">
+                <small className="text-[10px]">1</small>
+              </LuRepeat1>
+            )}
+          </button>
         </div>
 
         <div className="w-full mt-2">
@@ -176,7 +215,17 @@ const PlayerContent: React.FC<PlayerContentProps> = ({ song, songUrl }) => {
       </div>
 
       <div className="flex justify-end pr-6">
-        <VolumeControl volume={volume} setVolume={setVolume} />
+        <div className="md:hidden">
+          <div
+            onClick={handlePlay}
+            className="cursor-pointer text-black hover:bg-accent-color rounded-full bg-white p-3 duration-300"
+          >
+            <Icon size={20} className={isPlaying ? "pl-0" : "pl-[2px]"} />
+          </div>
+        </div>
+        <div className="hidden md:flex">
+          <VolumeControl volume={volume} setVolume={setVolume} />
+        </div>
       </div>
     </div>
   );

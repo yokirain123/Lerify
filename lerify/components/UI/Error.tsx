@@ -1,6 +1,6 @@
 "use client"
 
-import Box from "./Box"
+import Box from "./UI/Box"
 
 const Error = () => {
     return (

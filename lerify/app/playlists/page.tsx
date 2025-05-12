@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/components/Header";
+import Header from "@/components/UI/Header";
 import useAuthModal from "@/hooks/useAuthModal";
 import useUploadModal from "@/hooks/useUploadModal";
 import { useUser } from "@/hooks/useUser";
@@ -29,7 +29,7 @@ const Page: FC<PlaylistsProps> = () => {
   const routes = useMemo(
     () => [
       {
-        icon: '',
+        icon: "",
         label: "",
         active: pathname === "./local-songs/",
         href: "/playlists/local-songs",
@@ -42,13 +42,15 @@ const Page: FC<PlaylistsProps> = () => {
     <div>
       <Header>
         <div className="mb-2 text-4xl text-white font-black py-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">Playlists</div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
+            Playlists
+          </div>
         </div>
       </Header>
       <div className="flex">
         <div className="px-6">
           <div
-            className="text-white text-xl flex gap-2 items-center cursor-pointer hover:text-accent-color"
+            className="text-white text-xl border-bg-color hover:bg-[var(--bg-color)] transition-all duration-300 border-2 p-5 rounded-xl flex gap-2 items-center cursor-pointer uppercase hover:text-accent-color"
             onClick={onClick}
           >
             Add your song
@@ -56,10 +58,25 @@ const Page: FC<PlaylistsProps> = () => {
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4 px-6 text-4xl">
-        {routes.map((item) => (
-          <><ListItem key={item.label} {...item} image="/images/like.png" name={"Liked"} href={"liked"} /><ListItem key={item.label} {...item} image="/images/local.png" name={"Local Songs"} /></>
-                 ))}
+      <div className="mt-4 px-6 text-4xl">
+        {routes.map((item, index) => (
+          <div key={`route-${index}`} className="flex gap-5">
+            <ListItem
+              key={`liked-${index}`}
+              {...item}
+              image="/images/like.png"
+              name={"Liked"}
+              href={"liked"}
+            />
+            <ListItem
+              key={`local-${index}`}
+              {...item}
+              image="/images/local.png"
+              name={"Local Songs"}
+              href={item.href}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

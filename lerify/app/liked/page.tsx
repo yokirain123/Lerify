@@ -1,6 +1,6 @@
 "use client";
 
-import Header from "@/components/Header";
+import Header from "@/components/UI/Header";
 import LikedContent from "@/components/LikedContent";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
@@ -21,7 +21,7 @@ function Liked() {
       setLoading(true);
       const { data, error } = await supabaseClient
         .from("liked_songs")
-        .select("*, songs(*)") // Fetch liked_songs along with song details
+        .select("*, songs(*)") 
         .eq("user_id", user.id);
 
       if (!error && data) {
@@ -53,8 +53,8 @@ function Liked() {
         </div>
       </div>
       <div className="px-10">
-        <div className="w-full backdrop-blur-xl rounded-2xl h-screen p-3">
-          <div className="flex flex-col">
+      <div className="w-full backdrop-blur-xl rounded-2xl p-3">
+          <div className="flex flex-col pb-[130px]">
             {loading ? (
               <p className="text-white text-center">Loading...</p>
             ) : (
