@@ -29,16 +29,16 @@ const SearchInput = () => {
         setPlaceholder(placeholders[randomIndex]);
     }, []);
 
-    const handleSearchSubmit = () => {
-        if (value.trim()) {
-          const query = { query: value };
-          const url = qs.stringifyUrl({
-            url: '/search',
-            query: query,
-          });
-          router.push(url);
-        }
-      };
+        const handleSearchSubmit = () => {
+            if (value.trim()) {
+            const query = { query: value };
+            const url = qs.stringifyUrl({
+                url: '/search',
+                query: query,
+            });
+            router.push(url);
+            }
+        };
       
 
     const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {

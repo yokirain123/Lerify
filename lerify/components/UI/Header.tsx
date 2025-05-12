@@ -25,6 +25,7 @@ import toast from "react-hot-toast";
 import Logo from "./Logo";
 import SearchInput from "../Search/SearchInput";
 import Button from "./Button";
+import Image from "next/image";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -106,7 +107,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
               <Menu>
                 <MenuButton className="text-white hover:text-[var(--accent-color)] transition duration-300 flex items-center gap-3 justify-between">
                   {user?.user_metadata?.avatar_url ? (
-                    <img
+                    <Image
                       src={user.user_metadata.avatar_url}
                       alt="User Avatar"
                       className="w-12 h-12 rounded-full object-cover border-2 border-[var(--accent-color)]"

@@ -8,6 +8,7 @@ import { Song } from "@/types";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import SongItem from "@/components/SongItem";
 import useOnPlay from "@/hooks/useOnPlay";
+import Image from "next/image";
 
 const Profile = () => {
   const { user } = useUser();
@@ -62,7 +63,7 @@ const Profile = () => {
       <div className="px-10 text-white text-4xl flex flex-col gap-6 bg-bg-color p-6 rounded-xl">
         <div className="flex items-center gap-6">
           {user?.user_metadata?.avatar_url ? (
-            <img
+            <Image
               src={user.user_metadata.avatar_url}
               alt="User Avatar"
               className="w-[120px] h-[120px] rounded-full object-cover"

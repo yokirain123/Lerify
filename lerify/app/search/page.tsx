@@ -10,15 +10,13 @@ interface SearchProps {
 
 const Search = async ({ searchParams }: SearchProps) => {
   const songs = await getSongsByQuery(searchParams.query);
-
+  const query = searchParams?.query ?? '';
+  
   return (
     <div className="bg-black rounded-xl h-full w-full overflow-hidden overflow-y-auto">
       <Header>
         <div className="mb-2 text-5xl text-white font-black py-4">
-        <h1 className="text-5xl text-white font-black pt-4">
-  Search
-</h1>
-
+          <h1 className="text-5xl text-white font-black pt-4">Search</h1>
         </div>
       </Header>
 
