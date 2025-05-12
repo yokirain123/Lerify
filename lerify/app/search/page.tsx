@@ -1,10 +1,25 @@
 import getSongsByQuery from "@/actions/getSongsByQuery";
 import Header from "@/components/UI/Header";
 import SearchContent from "@/components/Search/SearchContent";
+import { Metadata } from "next";
 
 type Props = {
   searchParams?: Record<string, string | string[] | undefined>;
 };
+
+export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
+  const query = typeof searchParams?.query === "string" ? searchParams.query : "";
+  const songs = await getSongsByQuery(query);
+
+  return {
+    title: query ? `${query} - Search Results` : "Search",
+    openGraph: {
+      title: query ? `${query} - Search Results` : "Search",
+      description: query ? `Search results for ${query}` : "Browse music by searching keywords.",
+      images: query ? ["/search-query-image.jpg"] : ["/default-search-image.jpg"],
+    },
+  };
+}
 
 const Search = async ({ searchParams }: Props) => {
   const query = typeof searchParams?.query === "string" ? searchParams.query : "";
