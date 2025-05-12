@@ -1,6 +1,6 @@
 "use client"
 
-import Box from "./UI/Box"
+import Box from "./Box"
 
 const Error = () => {
     return (
@@ -11,3 +11,5 @@ const Error = () => {
         </Box>
     )
 }
+
+export default Error;
