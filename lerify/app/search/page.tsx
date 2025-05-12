@@ -1,12 +1,13 @@
+import { Metadata } from "next";
 import getSongsByQuery from "@/actions/getSongsByQuery";
 import Header from "@/components/UI/Header";
 import SearchContent from "@/components/Search/SearchContent";
-import { Metadata } from "next";
 
 type Props = {
   searchParams?: Record<string, string | string[] | undefined>;
 };
 
+// `generateMetadata` function remains mostly the same, no need for Promise handling
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
   const query = typeof searchParams?.query === "string" ? searchParams.query : "";
   const songs = await getSongsByQuery(query);
@@ -21,6 +22,7 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   };
 }
 
+// `Search` function expects searchParams as an object and works asynchronously with them
 const Search = async ({ searchParams }: Props) => {
   const query = typeof searchParams?.query === "string" ? searchParams.query : "";
   const songs = await getSongsByQuery(query);

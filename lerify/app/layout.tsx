@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Space_Grotesk } from "next/font/google";
 import "./globals.css";
-import Link from 'next/link';
 
 import Sidebar from "@/components/UI/Sidebar/Sidebar";
 import SupabaseProvider from "@/providers/SupabaseProvider";
@@ -25,7 +24,6 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const userSongs = await getSongsByUserId()
 
   return (
     <html lang="en">
