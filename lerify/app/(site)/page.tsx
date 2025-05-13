@@ -20,14 +20,14 @@ export default async function Home() {
         <ListItem image="/images/like.png" name={"Liked"} href={"liked"} />
       </Header>
 
-      <div className="mt-2 mb-7 px-6">
-        <div className="flex justify-between flex-col">
-          <h1 className="text-white font-black text-3xl mb-6">Newest songs</h1>
-          <div className="w-full">
-            <PageContent songs={songs} />
-          </div>
-        </div>
-      </div>
+      <div className="mt-2 mb-7 px-6 pb-28"> 
+  <div className="flex justify-between flex-col">
+    <h1 className="text-white font-black text-3xl mb-6">Newest songs</h1>
+    <div className="w-full">
+      <PageContent songs={songs} />
+    </div>
+  </div>
+</div>
     </div>
   );
 }

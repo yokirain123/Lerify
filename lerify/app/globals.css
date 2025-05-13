@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 html,
 body,
 :root {
@@ -13,11 +14,12 @@ body,
   --accent-color: #88b4fc;
   --inactive-text: #a8a6a6;
   --bg-color: #1a1a1a;
+  --secondary-color: #3b82f6;
 }
 
-/* Custom Scrollbar */
+
 ::-webkit-scrollbar {
-  width: 8px; /* Adjust width */
+  width: 8px;
 }
 
 ::-webkit-scrollbar-track {
@@ -71,4 +73,8 @@ input[type="range"]::-moz-range-thumb:hover {
   border-radius: 50%;
   cursor: pointer;
   transition: background 0.3s;
+}
+
+.swiper {
+  position: static !important;
 }

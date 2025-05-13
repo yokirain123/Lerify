@@ -30,7 +30,7 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
       >
         <Image
           className="object-cover"
-          src={imagePath || "/placeholder.png"}
+          src={imagePath || "/placeholder.png"} 
           fill
           alt="Song Cover"
         />

@@ -1,16 +1,15 @@
 import useLoadImage from "@/hooks/useLoadImage";
 import { Song } from "@/types";
-import React, { useState } from "react";
+import React from "react";
 import Image from "next/image";
-import { FaPlay } from "react-icons/fa6";
 import LikeButton from "../UI/LikeButton";
 
-interface MediaItemProps {
+interface PlayerItemProps {
   data: Song;
   onClick?: (id: string) => void;
 }
 
-const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
+const PlayerItem: React.FC<PlayerItemProps> = ({ data, onClick }) => {
   const imageUrl = useLoadImage(data) || "/placeholder.png";
 
   const handleClick = () => {
@@ -48,4 +47,4 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
   );
 };
 
-export default MediaItem;
+export default PlayerItem;

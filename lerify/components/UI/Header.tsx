@@ -19,12 +19,13 @@ import { HiSearch } from "react-icons/hi";
 import { HiHome } from "react-icons/hi2";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { useUser } from "@/hooks/useUser";
-import { IoLogOut } from "react-icons/io5";
+import { IoClose, IoLogOut } from "react-icons/io5";
 import { MdAccountCircle, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import toast from "react-hot-toast";
 import Logo from "./Logo";
 import SearchInput from "../Search/SearchInput";
 import Button from "./Button";
+import Burger from "./Burger";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -56,7 +57,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 
   return (
     <div className={twMerge(`h-fit bg-black py-3 pl-6`, className)}>
-      <div className="w-full flex items-center justify-between relative">
+      <div className="w-full flex items-center gap-14 justify-between relative">
         <div className="hidden md:flex gap-[2px] items-center">
           <button
             onClick={() => router.back()}
@@ -82,22 +83,32 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           <SearchInput />
         </div>
 
-        <div className="flex md:hidden gap-x-2 items-center">
-          <button>
-            <HiHome
-              size={60}
-              className="rounded-full p-2 text-white hover:text-[var(--accent-color)] transition duration-300 bg-[var(--bg-color)]"
-            />
-          </button>
-          <button onClick={toggleMobileSearch}>
-            <HiSearch
-              size={60}
-              className="rounded-full p-2 text-white hover:text-[var(--accent-color)] transition duration-300 bg-[var(--bg-color)]"
-            />
-          </button>
-        </div>
+        {showMobileSearch ? (
+  <div className="w-full flex px-4 py-2 bg-black z-10">
+    <SearchInput className="w-full">
+      <button
+        onClick={toggleMobileSearch}
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-white"
+      >
+        <IoClose size={24} />
+      </button>
+    </SearchInput>
+  </div>
+) : (
+  <button
+  onClick={toggleMobileSearch}
+  className="md:hidden" // <-- hides on md+
+>
+  <HiSearch
+    size={45}
+    className="text-white hover:text-[var(--accent-color)] transition duration-300"
+  />
+</button>
 
-        <div className="flex items-center gap-x-1 text-lg">
+)}
+
+
+        <div className="hidden md:flex items-center gap-x-1 text-lg">
           {user ? (
             <div className="bg-bg-color p-3 rounded-xl w-[210px]">
               <Menu>
@@ -152,13 +163,9 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             </Button>
           )}
         </div>
-      </div>
 
-      {showMobileSearch && (
-        <div className="md:hidden px-4 py-2 mt-2 bg-black z-10">
-          <SearchInput />
-        </div>
-      )}
+        <Burger />
+      </div>
 
       {children}
     </div>
