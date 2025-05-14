@@ -35,7 +35,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
   );
 
   return (
-    <div className="flex h-full">
+    <div className="flex h-full md:pl-4">
       <div className=" hidden md:flex flex-col w-[100px] items-center px-2 py-3 text-[var(--accent-color)] flex-shrink-0 gap-32">
       <Logo />
         <div className="flex flex-col bg-bg-color rounded-xl gap-y-6 px-5 py-[100px]">

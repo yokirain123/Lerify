@@ -22,7 +22,7 @@ const LocalContent: React.FC<PageContentProps> = ({
     }
 
     return (
-        <div className="w-full flex flex-col gap-3 pl-6 pb-32">
+        <div className="w-full flex flex-col gap-3 p-6 pb-32">
             {songs.map((item) => (
                 <MediaItem
                     key={item.id}

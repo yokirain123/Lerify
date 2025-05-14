@@ -20,7 +20,7 @@ const PlayerItem: React.FC<PlayerItemProps> = ({ data, onClick }) => {
 
   return (
     <div
-      className="flex w-full items-center h-[100px] cursor-pointer relative shadow-md hover:shadow-lg transition-all duration-300"
+      className="flex w-full justify-between items-center h-[100px] cursor-pointer relative shadow-md hover:shadow-lg transition-all duration-300"
       onClick={handleClick}
     >
       <div className="relative flex-[0_0_100px] h-full">
@@ -32,16 +32,17 @@ const PlayerItem: React.FC<PlayerItemProps> = ({ data, onClick }) => {
           priority
         />
       </div>
+      <div className="flex flex-1 items-center gap-3 px-4">
+        <div className="flex flex-col justify-center px-4 py-2 text-white">
+          <p className="font-bold text-accent-color truncate whitespace-nowrap">
+            {data.title}
+          </p>
+          <p className="text-sm text-gray-300 truncate">{data.author}</p>
+        </div>
 
-      <div className="flex flex-col justify-center px-4 py-2 text-white">
-        <p className="font-bold text-accent-color truncate whitespace-nowrap">
-          {data.title}
-        </p>
-        <p className="text-sm text-gray-300 truncate">{data.author}</p>
-      </div>
-
-      <div className=" flex items-center">
-        <LikeButton songId={data.id} />
+        <div className=" flex items-center">
+          <LikeButton songId={data.id} />
+        </div>
       </div>
     </div>
   );

@@ -58,34 +58,35 @@ const Profile = () => {
         </div>
       </Header>
 
-<div className="pl-6">
+<div className="px-6">
       <div className="px-10 text-white text-4xl flex flex-col gap-6 bg-bg-color p-6 rounded-xl">
-        <div className="flex items-center gap-6">
+        <div className="flex flex-col sm:flex-row items-center gap-6">
           {user?.user_metadata?.avatar_url ? (
             <img
               src={user.user_metadata.avatar_url}
               alt="User Avatar"
-              className="w-[120px] h-[120px] rounded-full object-cover"
+              className="w-[80px] h-[80px] sm:w-[120px] sm:h-[120px] rounded-full object-cover"
             />
           ) : (
             <MdAccountCircle
               className="border-accent-color border-3 rounded-full"
-              size={120}
+              size={80}
+              style={{ fontSize: "120px" }}
             />
           )}
-          <div className="flex flex-col gap-3">
-            <span className="text-7xl text-accent-color font-bold">
+          <div className="flex flex-col gap-3 text-center sm:text-left">
+            <span className="text-4xl sm:text-7xl text-accent-color font-bold">
               {userName}
             </span>
-            <div className="text-xl">
+            <div className="text-lg sm:text-xl">
               Liked songs: {loading ? "Loading..." : likedSongs.length}
             </div>
           </div>
         </div>
       </div>
       {!loading && likedSongs.length > 0 && (
-        <div className="px-10 mt-6 pb-[150px]">
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-6">
+        <div className="mt-6 pb-[150px] justify-items-center">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6 gap-6">
             {likedSongs.map((song) => (
               <SongItem
                 key={song.id}

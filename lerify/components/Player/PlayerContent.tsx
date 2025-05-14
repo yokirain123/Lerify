@@ -26,7 +26,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
   const player = usePlayer();
   const [isPlaying, setIsPlaying] = useState(false);
   const [volume, setVolume] = useState(
-    Number(localStorage.getItem("volume")) || 50
+    Number(localStorage.getItem("volume")) || 100
   );
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
@@ -234,7 +234,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
         </div>
       )}
 
-      <div className="md:opacity-100 opacity-0 grid grid-cols-2 md:grid-cols-3 w-full h-full items-center px-4">
+      <div className="md:opacity-100 opacity-0 grid grid-cols-2 md:grid-cols-3 w-full h-full items-center">
         <div className="flex w-full">
           <PlayerItem data={song} />
         </div>

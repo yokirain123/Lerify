@@ -32,14 +32,12 @@ const Burger = () => {
 
   return (
     <>
-      {/* Burger Icon */}
-      <div className="md:hidden text-white z-50">
+      <div className="md:hidden text-white z-25">
         <button onClick={() => setOpen(true)}>
           <LuMenu size={45} />
         </button>
       </div>
 
-      {/* Backdrop */}
       {open && (
         <div
           className="fixed inset-0 bg-black/50 z-40"
@@ -47,16 +45,13 @@ const Burger = () => {
         />
       )}
 
-      {/* Drawer Panel */}
       <div
         className={`fixed top-0 right-0 h-screen w-3/4 max-w-xs bg-[var(--bg-color)] z-50 transform transition-transform duration-300 ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="flex flex-col h-full p-6 text-white text-xl">
-          {/* Top Section */}
           <div className="flex flex-col gap-4">
-            {/* Profile */}
             <div
               className="flex items-center gap-5 cursor-pointer"
               onClick={() => {
@@ -112,7 +107,6 @@ const Burger = () => {
             </div>
           </div>
 
-          {/* Bottom Section - Pushed to bottom with mt-auto */}
           <div className="mt-auto">
             <hr className="border-gray-600 my-4" />
             {user ? (
