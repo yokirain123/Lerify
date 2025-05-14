@@ -21,8 +21,10 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
   const imageUrl = useLoadImage(data) || "/placeholder.png";
 
   const handleClick = () => {
-    if (onClick) {
+    if (!isExpanded && onClick) {
       onClick(data.id);
+    } else if (onCollapse) {
+      onCollapse(); // Collapse when the section is clicked and expanded
     }
   };
 
@@ -31,6 +33,7 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
       className={`relative w-full overflow-hidden text-white transition-all duration-500 ease-in-out ${
         isExpanded ? "h-[85vh] p-4" : "h-[100px] px-2 py-1"
       }`}
+      onClick={handleClick} // Trigger collapse/expand on whole section click
     >
       {/* Blurred background image */}
       <Image
@@ -49,7 +52,10 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
         {isExpanded && (
           <div className="flex justify-start items-center">
             <button
-              onClick={onCollapse}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent triggering the section click event
+                onCollapse && onCollapse();
+              }}
               className="text-white text-xl hover:text-accent-color transition"
             >
               <IoChevronDown size={45} />
@@ -62,11 +68,12 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
           className={`flex items-center transition-all duration-500 ${
             isExpanded ? "flex-col justify-center h-full" : "flex-row"
           }`}
-          onClick={!isExpanded ? handleClick : undefined}
         >
           <div
             className={`relative overflow-hidden ${
-              isExpanded ? "w-3/4 aspect-square shadow-sm shadow-accent-color" : "flex-[0_0_80px] h-[80px]"
+              isExpanded
+                ? "w-3/4 aspect-square shadow-sm shadow-accent-color"
+                : "flex-[0_0_80px] h-[80px]"
             } rounded-2xl`}
           >
             <Image
@@ -99,5 +106,6 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
     </div>
   );
 };
+
 
 export default MobilePlayerItem;
