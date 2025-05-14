@@ -33,7 +33,7 @@ const SidebarItem: React.FC<SidebarItemProps> = ({
         hover:text-[var(--accent-color)]
         text-[var(--inactive-text)]
         `,
-        active && "text-[var(--accent-color)] drop-shadow-3xl"
+        active && "text-[var(--accent-color)]"
       )}
     >
       <Icon className="" size={40} />

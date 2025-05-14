@@ -14,18 +14,16 @@ import { twMerge } from "tailwind-merge";
 
 import useAuthModal from "@/hooks/useAuthModal";
 import { useSupabaseClient } from "@supabase/auth-helpers-react";
-
 import { HiSearch } from "react-icons/hi";
-import { HiHome } from "react-icons/hi2";
 import { RxCaretLeft, RxCaretRight } from "react-icons/rx";
 import { useUser } from "@/hooks/useUser";
 import { IoClose, IoLogOut } from "react-icons/io5";
 import { MdAccountCircle, MdOutlineKeyboardArrowDown } from "react-icons/md";
 import toast from "react-hot-toast";
-import Logo from "./Logo";
 import SearchInput from "../Search/SearchInput";
 import Button from "./Button";
 import Burger from "./Burger";
+import Logo from "./Logo";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -56,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   };
 
   return (
-    <div className={twMerge(`h-fit bg-black py-3 pl-6`, className)}>
+    <div className={twMerge(`h-fit bg-black py-3 px-6`, className)}>
       <div className="w-full flex items-center gap-14 justify-between relative">
         <div className="hidden md:flex gap-[2px] items-center">
           <button

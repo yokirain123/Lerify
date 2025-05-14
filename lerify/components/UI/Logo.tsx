@@ -4,7 +4,7 @@ import { GiSpotedFlower } from 'react-icons/gi';
 
 const Logo = () => {
     return (
-        <Link href="/" className='hidden md:block absolute top-7 left-8 text-accent-color'>
+        <Link href="/" className='hidden md:block text-accent-color'>
             <GiSpotedFlower size={70} />
         </Link>
     );

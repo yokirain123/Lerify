@@ -2,14 +2,10 @@
 
 import { usePathname } from "next/navigation";
 import React, { useMemo } from "react";
-
 import { HiHome } from "react-icons/hi2";
 import { HiSearch } from "react-icons/hi";
-
-
 import SidebarItem from "./SidebarItem";
 import { TbPlaylist } from "react-icons/tb";
-import Box from "../Box";
 import Logo from "../Logo";
 
 interface SidebarProps {
@@ -21,12 +17,7 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 
   const routes = useMemo(
     () => [
-      {
-        icon: HiHome,
-        label: "Home",
-        active: pathname === "/",
-        href: "/",
-      },
+      { icon: HiHome, label: "Home", active: pathname === "/", href: "/" },
       {
         icon: HiSearch,
         label: "Search",
@@ -42,24 +33,18 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
     ],
     [pathname]
   );
-  
 
   return (
-    <div>
-      <div className="flex h-full px-4">
-        <Logo/>
-        <div className="hidden md:flex flex-col justify-center gap-y-2 w-[100px] h-screen bg-black p-2 text-[var(--accent-color)]">
-          <Box className="flex">
-            <div className="flex flex-col justify-center gap-y-6 px-5 py-4 h-[700px]">
-              {routes.map((item) => (
-                <SidebarItem key={item.label} {...item} />
-              ))}
-            </div>
-          </Box>
+    <div className="flex h-full">
+      <div className=" hidden md:flex flex-col w-[100px] items-center px-2 py-3 text-[var(--accent-color)] flex-shrink-0 gap-32">
+      <Logo />
+        <div className="flex flex-col bg-bg-color rounded-xl gap-y-6 px-5 py-[100px]">
+          {routes.map((item) => (
+            <SidebarItem key={item.label} {...item} />
+          ))}
         </div>
-
-        <main className="h-full flex-1 overflow-y-auto py-2">{children}</main>
       </div>
+      <main className="flex-1 overflow-y-auto">{children}</main>
     </div>
   );
 };

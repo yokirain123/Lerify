@@ -2,6 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer utilities {
+  .gap-responsive {
+    gap: 6rem;
+    transition: gap 0.3s ease-in-out;
+  }
+
+  @media (max-height: 900px) {
+    .gap-responsive {
+      gap: 4rem;
+    }
+  }
+
+  @media (max-height: 700px) {
+    .gap-responsive {
+      gap: 2rem;
+    }
+  }
+
+  @media (max-height: 500px) {
+    .gap-responsive {
+      gap: 1rem;
+    }
+  }
+}
 
 html,
 body,
