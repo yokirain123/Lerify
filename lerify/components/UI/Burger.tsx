@@ -1,4 +1,3 @@
-// components/Burger.tsx
 "use client";
 
 import React, { useState } from "react";
@@ -19,7 +18,6 @@ const Burger = () => {
   const authModal = useAuthModal();
   const supabaseClient = useSupabaseClient();
   const { user } = useUser();
-  
 
   const userName = user?.user_metadata?.user_name || "Unknown User";
 
@@ -55,9 +53,10 @@ const Burger = () => {
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col justify-between h-full p-6 text-white text-xl">
-          {/* Top Section: Profile */}
+        <div className="flex flex-col h-full p-6 text-white text-xl">
+          {/* Top Section */}
           <div className="flex flex-col gap-4">
+            {/* Profile */}
             <div
               className="flex items-center gap-5 cursor-pointer"
               onClick={() => {
@@ -89,8 +88,8 @@ const Burger = () => {
 
             <hr className="border-gray-600 my-4" />
 
-            {/* Middle Section: Navigation */}
-            <div className="flex flex-col gap-4 mt-2">
+            {/* Navigation */}
+            <div className="flex flex-col gap-4">
               <button
                 className="text-left flex items-center gap-3"
                 onClick={() => {
@@ -113,19 +112,19 @@ const Burger = () => {
             </div>
           </div>
 
-          {/* Bottom Section: Logout or Login */}
-          <div className="flex flex-col gap-4">
-            <hr className="border-gray-600 my-2" />
+          {/* Bottom Section - Pushed to bottom with mt-auto */}
+          <div className="mt-auto">
+            <hr className="border-gray-600 my-4" />
             {user ? (
               <button
-                className="text-left flex items-center gap-3"
+                className="text-left flex items-center gap-3 w-full py-2"
                 onClick={handleLogout}
               >
                 <IoLogOut size={24} /> Log out
               </button>
             ) : (
               <button
-                className="text-left flex items-center gap-3"
+                className="text-left flex items-center gap-3 w-full py-2"
                 onClick={() => {
                   authModal.onOpen();
                   setOpen(false);
