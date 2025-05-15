@@ -73,6 +73,15 @@ const PageContent: React.FC<PageContentProps> = ({ songs }) => {
           1024: {
             slidesPerView: 6,
           },
+          1280: {
+            slidesPerView: 7,
+          },
+          1536: {
+            slidesPerView: 8,
+          },
+          1920: {
+            slidesPerView: 9, 
+          },
         }}
       >
         {songs.map((item) => (
