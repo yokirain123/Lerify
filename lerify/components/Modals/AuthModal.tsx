@@ -58,7 +58,7 @@ const AuthModal = () => {
       <Auth
         theme="dark"
         socialLayout={socialLayout}
-        providers={["google", "github", "spotify"]}
+        providers={["google", "github"]}
         appearance={{
           theme: ThemeSupa,
           variables: {
