@@ -24,7 +24,7 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
     if (!isExpanded && onClick) {
       onClick(data.id);
     } else if (onCollapse) {
-      onCollapse(); // Collapse when the section is clicked and expanded
+      onCollapse();
     }
   };
 
@@ -33,9 +33,8 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
       className={`relative w-full overflow-hidden text-white transition-all duration-500 ease-in-out ${
         isExpanded ? "h-[85vh] p-4" : "h-[100px] px-2 py-1"
       }`}
-      onClick={handleClick} // Trigger collapse/expand on whole section click
+      onClick={handleClick}
     >
-      {/* Blurred background image */}
       <Image
         src={imageUrl}
         alt="Background"
@@ -43,17 +42,14 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
         className="object-cover blur-md scale-110 z-0"
         priority
       />
-      {/* Dark overlay for readability */}
       <div className="absolute inset-0 bg-black/60 z-10" />
 
-      {/* Foreground content */}
       <div className="relative z-20 h-full w-full">
-        {/* Collapse button */}
         {isExpanded && (
           <div className="flex justify-start items-center">
             <button
               onClick={(e) => {
-                e.stopPropagation(); // Prevent triggering the section click event
+                e.stopPropagation();
                 onCollapse && onCollapse();
               }}
               className="text-white text-xl hover:text-accent-color transition"
@@ -63,7 +59,6 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
           </div>
         )}
 
-        {/* Song details */}
         <div
           className={`flex items-center transition-all duration-500 ${
             isExpanded ? "flex-col justify-center h-full" : "flex-row"

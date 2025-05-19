@@ -95,7 +95,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 ) : (
   <button
   onClick={toggleMobileSearch}
-  className="md:hidden" // <-- hides on md+
+  className="md:hidden"
 >
   <HiSearch
     size={45}

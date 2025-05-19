@@ -29,7 +29,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({ volume, setVolume }) => {
 
   const toggleMute = () => {
     if (volume === 0) {
-      const prevVolume = Number(localStorage.getItem("prevVolume")) || 100; // Default to 100
+      const prevVolume = Number(localStorage.getItem("prevVolume")) || 100;
       setVolume(prevVolume);
     } else {
       localStorage.setItem("prevVolume", String(volume));

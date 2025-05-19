@@ -7,9 +7,8 @@ type Props = {
   searchParams?: Promise<Record<string, string | string[] | undefined> | undefined>;
 };
 
-// `generateMetadata` function remains mostly the same, no need for Promise handling
 export async function generateMetadata({ searchParams }: Props): Promise<Metadata> {
-  const resolvedSearchParams = await searchParams; // Resolve the promise
+  const resolvedSearchParams = await searchParams; 
   const query = typeof resolvedSearchParams?.query === "string" ? resolvedSearchParams.query : "";
   const songs = await getSongsByQuery(query);
 
@@ -23,9 +22,8 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
   };
 }
 
-// `Search` function expects searchParams as an object and works asynchronously with them
 const Search = async ({ searchParams }: Props) => {
-  const resolvedSearchParams = await searchParams; // Resolve the promise
+  const resolvedSearchParams = await searchParams; 
   const query = typeof resolvedSearchParams?.query === "string" ? resolvedSearchParams.query : "";
   const songs = await getSongsByQuery(query);
 

@@ -83,7 +83,6 @@ const Burger = () => {
 
             <hr className="border-gray-600 my-4" />
 
-            {/* Navigation */}
             <div className="flex flex-col gap-4">
               <button
                 className="text-left flex items-center gap-3"

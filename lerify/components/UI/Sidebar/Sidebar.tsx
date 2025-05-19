@@ -1,10 +1,11 @@
 "use client";
 
-import { usePathname } from "next/navigation";
 import React, { useMemo } from "react";
+import { usePathname } from "next/navigation";
+import SidebarItem from "./SidebarItem";
+
 import { HiHome } from "react-icons/hi2";
 import { HiSearch } from "react-icons/hi";
-import SidebarItem from "./SidebarItem";
 import { TbPlaylist } from "react-icons/tb";
 import Logo from "../Logo";
 
@@ -17,7 +18,11 @@ const Sidebar: React.FC<SidebarProps> = ({ children }) => {
 
   const routes = useMemo(
     () => [
-      { icon: HiHome, label: "Home", active: pathname === "/", href: "/" },
+      { icon: HiHome, 
+        label: "Home", 
+        active: pathname === "/", 
+        href: "/" 
+      },
       {
         icon: HiSearch,
         label: "Search",

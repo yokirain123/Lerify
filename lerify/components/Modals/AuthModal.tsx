@@ -28,9 +28,6 @@ const AuthModal = () => {
       router.refresh();
     }
   }, [session, router, onClose]);
-  
-
-  
 
   const onChange = (open: boolean) => {
     console.log("Modal open state:", open);
