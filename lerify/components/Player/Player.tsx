@@ -31,7 +31,7 @@ const Player = () => {
   if (!isVisible || !song || !songUrl) return null;
 
   return (
-    <div className="fixed bottom-0 left-0 w-full z-20 text-white bg-[#28282B]">
+    <div className="fixed bottom-0 left-0 w-full z-20 text-white bg-[--dark-bg] border-t border-gray-800">
       {!isExpanded && (
         <div className="md:hidden flex items-center fixed bottom-0 w-full justify-between px-4 py-3 border-t border-gray-800 bg-dark-bg">
           <div
