@@ -17,7 +17,7 @@ export default function ThemeToggle() {
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       aria-label="Toggle theme"
-      className='flex items-center'
+      className='flex items-center gap-3'
     >
       Theme Toggle {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
     </button>

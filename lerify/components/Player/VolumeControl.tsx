@@ -49,11 +49,15 @@ const VolumeControl: React.FC<VolumeControlProps> = ({ volume, setVolume }) => {
 
       <input
         type="range"
-        min="0"
-        max="100"
+        min={0}
+        max={100}
+        step="1"
         value={volume}
         onChange={handleVolumeChange}
-        className="w-[100px] cursor-pointer rounded-full hover:bg-accent-color appearance-none h-[4px] transition-all duration-300 accent-white"
+        className="w-[100px] cursor-pointer rounded-full appearance-none h-[4px] transition-all duration-300"
+        style={{
+          background: `linear-gradient(to right, #3b82f6 0%, #3b82f6 ${volume}%, #4b5563 ${volume}%, #4b5563 100%)`,
+        }}
       />
     </div>
   );

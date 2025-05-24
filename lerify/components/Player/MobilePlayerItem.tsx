@@ -52,7 +52,7 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
                 e.stopPropagation();
                 onCollapse && onCollapse();
               }}
-              className="text-theme text-xl hover:text-accent-color transition"
+              className="text-white text-xl hover:text-accent-color transition"
             >
               <IoChevronDown size={45} />
             </button>
