@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 @layer utilities {
+   .text-theme {
+    @apply text-black dark:text-white;
+  }
   .gap-responsive {
     gap: 6rem;
     transition: gap 0.3s ease-in-out;

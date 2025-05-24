@@ -61,7 +61,7 @@ interface SearchInputProps {
           value={value}
           onChange={(e) => setValue(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="w-full py-5 pl-6 pr-14 border-accent-color border-2 rounded-2xl text-white text-lg bg-[var(--bg-color)]"
+          className="w-full py-5 pl-6 pr-14 border-accent-color border-2 rounded-2xl text-theme text-lg bg-[var(--bg-color)]"
         />
         {children}
       </div>

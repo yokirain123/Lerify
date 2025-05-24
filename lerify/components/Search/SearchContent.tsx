@@ -12,7 +12,7 @@ const SearchContent: React.FC<SearchContentProps> = ({ songs }) => {
   const onPlay = useOnPlay(songs);
 
   if (songs.length === 0) {
-    return <div className="text-white text-center mt-10">No song found</div>;
+    return <div className="text-theme text-center mt-10">No song found</div>;
   }
 
   return (

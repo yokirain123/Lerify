@@ -30,7 +30,7 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
 
   return (
     <div
-      className={`relative w-full overflow-hidden text-white transition-all duration-500 ease-in-out ${
+      className={`relative w-full overflow-hidden text-theme transition-all duration-500 ease-in-out ${
         isExpanded ? "h-[85vh] p-4" : "h-[100px] px-2 py-1"
       }`}
       onClick={handleClick}
@@ -52,7 +52,7 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
                 e.stopPropagation();
                 onCollapse && onCollapse();
               }}
-              className="text-white text-xl hover:text-accent-color transition"
+              className="text-theme text-xl hover:text-accent-color transition"
             >
               <IoChevronDown size={45} />
             </button>

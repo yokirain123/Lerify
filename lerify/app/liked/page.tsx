@@ -49,7 +49,7 @@ function Liked() {
         </div>
         <div className="flex flex-col text-center sm:text-left">
           <p className="font-semibold text-inactive-text">Playlist</p>
-          <h1 className="mb-2 text-4xl sm:text-5xl text-white font-black">
+          <h1 className="mb-2 text-4xl sm:text-5xl text-theme font-black">
             Liked Songs
           </h1>
         </div>
@@ -58,7 +58,7 @@ function Liked() {
       <div className="w-full backdrop-blur-xl rounded-2xl p-3">
           <div className="flex flex-col pb-[130px]">
             {loading ? (
-              <p className="text-white text-center">Loading...</p>
+              <p className="text-theme text-center">Loading...</p>
             ) : (
               <LikedContent songs={songs} />
             )}

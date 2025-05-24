@@ -51,7 +51,7 @@ const Profile = () => {
   return (
     <div>
       <Header>
-        <div className="mb-2 text-5xl text-white font-black py-4">
+        <div className="mb-2 text-5xl text-theme font-black py-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
             Profile
           </div>
@@ -59,7 +59,7 @@ const Profile = () => {
       </Header>
 
 <div className="px-6">
-      <div className="px-10 text-white text-4xl flex flex-col gap-6 bg-bg-color p-6 rounded-xl">
+      <div className="px-10 text-theme text-4xl flex flex-col gap-6 bg-bg-color p-6 rounded-xl">
         <div className="flex flex-col sm:flex-row items-center gap-6">
           {user?.user_metadata?.avatar_url ? (
             <img

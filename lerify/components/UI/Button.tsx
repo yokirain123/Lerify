@@ -17,7 +17,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             border-transparent
             disabled:cursor-not-allowed
             disabled:opacity-50
-            text-white
+            text-theme
             hover:text-[var(--accent-color)]
             transition
             duration-300

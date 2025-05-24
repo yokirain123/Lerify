@@ -21,7 +21,7 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
   return (
     <div
       onClick={() => onClick(data.id)}
-      className="flex relative flex-col w-full max-w-[240px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[240px] items-center rounded-2xl overflow-hidden bg-bg-color cursor-pointer text-white p-3 sm:p-4 gap-x-4"
+      className="flex relative flex-col w-full max-w-[240px] sm:max-w-[200px] md:max-w-[220px] lg:max-w-[240px] items-center rounded-2xl overflow-hidden bg-bg-color cursor-pointer text-theme p-3 sm:p-4 gap-x-4"
     >
       <div
         className="relative w-full aspect-square overflow-hidden rounded-2xl"
@@ -38,7 +38,7 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
           className={`absolute inset-0 flex justify-center items-center bg-dark-bg/45 backdrop-blur-sm transition-all duration-300 ease-in-out
             ${isHovered ? "opacity-100" : "opacity-0"}`}
         >
-          <FaPlay size={30} className="text-white" />
+          <FaPlay size={30} className="text-theme" />
         </div>
       </div>
 

@@ -40,11 +40,11 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
             isHovered ? "opacity-100" : "opacity-0"
           }`}
         >
-          <FaPlay size={30} className="text-white" />
+          <FaPlay size={30} className="text-theme" />
         </div>
       </div>
       
-      <div className="flex flex-col justify-center px-4 py-2 text-white flex-grow min-w-0">
+      <div className="flex flex-col justify-center px-4 py-2 text-theme flex-grow min-w-0">
         <p className="text-lg font-bold text-accent-color truncate">
           {data.title}
         </p>

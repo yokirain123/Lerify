@@ -63,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             className="rounded-l-lg bg-[var(--bg-color)] flex items-center justify-center py-4"
           >
             <RxCaretLeft
-              className="text-white hover:text-[var(--accent-color)] transition duration-300"
+              className="text-theme hover:text-[var(--accent-color)] transition duration-300"
               size={40}
             />
           </button>
@@ -72,7 +72,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
             className="rounded-r-lg bg-[var(--bg-color)] flex items-center justify-center py-4"
           >
             <RxCaretRight
-              className="text-white hover:text-[var(--accent-color)] transition duration-300"
+              className="text-theme hover:text-[var(--accent-color)] transition duration-300"
               size={40}
             />
           </button>
@@ -87,7 +87,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
     <SearchInput className="w-full">
       <button
         onClick={toggleMobileSearch}
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-white"
+        className="absolute right-4 top-1/2 -translate-y-1/2 text-theme"
       >
         <IoClose size={24} />
       </button>
@@ -100,7 +100,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
 >
   <HiSearch
     size={45}
-    className="text-white hover:text-[var(--accent-color)] transition duration-300"
+    className="text-theme hover:text-[var(--accent-color)] transition duration-300"
   />
 </button>
 
@@ -111,7 +111,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           {user ? (
             <div className="bg-bg-color p-3 rounded-xl w-[210px]">
               <Menu>
-                <MenuButton className="text-white hover:text-[var(--accent-color)] transition duration-300 flex items-center gap-3 justify-between">
+                <MenuButton className="text-theme hover:text-[var(--accent-color)] transition duration-300 flex items-center gap-3 justify-between">
                   {user?.user_metadata?.avatar_url ? (
                     <img
                       src={user.user_metadata.avatar_url}
@@ -160,7 +160,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
           ) : (
             <Button
               onClick={authModal.onOpen}
-              className="flex items-center rounded-2xl px-4 text-white font-bold gap-2 py-8 text-2xl"
+              className="flex items-center rounded-2xl px-4 text-theme font-bold gap-2 py-8 text-2xl"
             >
               Log in
               <MdAccountCircle size={30} />

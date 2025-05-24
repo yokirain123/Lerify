@@ -43,11 +43,11 @@ const SearchItem: React.FC<SearchItemProps> = ({ data, onClick }) => {
             isHovered && !isLiked ? "opacity-100" : "opacity-0"
           } ${!isLiked && "sm:rounded-l-2xl rounded-t-2xl sm:rounded-t-none"}`}
         >
-          <FaPlay size={30} className="text-white" />
+          <FaPlay size={30} className="text-theme" />
         </div>
       </div>
 
-      <div className="flex flex-col justify-center px-4 py-3 text-white flex-grow relative">
+      <div className="flex flex-col justify-center px-4 py-3 text-theme flex-grow relative">
         <p className="text-base sm:text-lg font-bold text-accent-color line-clamp-1">{data.title}</p>
         <p className="text-sm text-gray-300 truncate">{data.author}</p>
 

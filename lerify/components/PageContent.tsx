@@ -35,20 +35,20 @@ const PageContent: React.FC<PageContentProps> = ({ songs }) => {
   }, [swiperInstance]);
 
   if (songs.length === 0) {
-    return <div className="text-white">No songs, womp womp</div>;
+    return <div className="text-theme">No songs, womp womp</div>;
   }
 
   return (
     <div className="relative group z-0 overflow-visible">
       <button
         ref={prevRef}
-        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-bg-color border-2 border-accent-color text-white hover:border-[#3b82f6] p-4 rounded-xl transition opacity-0 group-hover:opacity-100"
+        className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-bg-color border-2 border-accent-color text-theme hover:border-[#3b82f6] p-4 rounded-xl transition opacity-0 group-hover:opacity-100"
       >
         <FaArrowLeft />
       </button>
       <button
         ref={nextRef}
-        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-bg-color border-2 border-accent-color text-white hover:border-[#3b82f6] p-4 rounded-xl transition opacity-0 group-hover:opacity-100"
+        className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-bg-color border-2 border-accent-color text-theme hover:border-[#3b82f6] p-4 rounded-xl transition opacity-0 group-hover:opacity-100"
       >
         <FaArrowRight />
       </button>

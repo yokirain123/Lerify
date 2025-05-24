@@ -30,8 +30,8 @@ const Search = async ({ searchParams }: Props) => {
   return (
     <div className="bg-dark-bg rounded-xl h-full w-full overflow-hidden overflow-y-auto">
       <Header>
-        <div className="mb-2 text-5xl text-white font-black py-4">
-          <h1 className="text-5xl text-white font-black pt-4">Search</h1>
+        <div className="mb-2 text-5xl text-theme font-black py-4">
+          <h1 className="text-5xl text-theme font-black pt-4">Search</h1>
         </div>
       </Header>
 
@@ -39,7 +39,7 @@ const Search = async ({ searchParams }: Props) => {
         {query ? (
           <SearchContent songs={songs} />
         ) : (
-          <p className="text-white text-xl font-bold">What’s on your mind now?</p>
+          <p className="text-theme text-xl font-bold">What’s on your mind now?</p>
         )}
       </div>
     </div>

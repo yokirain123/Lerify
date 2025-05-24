@@ -32,7 +32,7 @@ const Burger = () => {
 
   return (
     <>
-      <div className="md:hidden text-white z-25">
+      <div className="md:hidden text-theme z-25">
         <button onClick={() => setOpen(true)}>
           <LuMenu size={45} />
         </button>
@@ -50,7 +50,7 @@ const Burger = () => {
           open ? "translate-x-0" : "translate-x-full"
         }`}
       >
-        <div className="flex flex-col h-full p-6 text-white text-xl">
+        <div className="flex flex-col h-full p-6 text-theme text-xl">
           <div className="flex flex-col gap-4">
             <div
               className="flex items-center gap-5 cursor-pointer"

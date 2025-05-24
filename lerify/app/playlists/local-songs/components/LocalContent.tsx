@@ -17,7 +17,7 @@ const LocalContent: React.FC<PageContentProps> = ({
 
     if (songs.length === 0) {
         return (
-            <div className='text-white text-center mt-10'>No songs available</div>
+            <div className='text-theme text-center mt-10'>No songs available</div>
         );
     }
 

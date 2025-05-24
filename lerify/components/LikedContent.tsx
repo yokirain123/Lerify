@@ -23,7 +23,7 @@ const LikedContent: React.FC<LikedContentProps> = ({ songs }) => {
   }, [isLoading, user, router]);
 
   if (songs.length === 0) {
-    return <div className="text-white text-center mt-10">No liked songs yet.</div>;
+    return <div className="text-theme text-center mt-10">No liked songs yet.</div>;
   }
 
   return (

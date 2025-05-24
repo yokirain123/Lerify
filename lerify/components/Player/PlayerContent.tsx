@@ -178,13 +178,13 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
               onClick={() => setIsShuffling(!isShuffling)}
               size={22}
               className={`cursor-pointer hover:text-accent-color transition ${
-                isShuffling ? "text-accent-color" : "text-white"
+                isShuffling ? "text-accent-color" : "text-theme"
               }`}
             />
             <IoPlaySkipBack
               onClick={onPlayPrevious}
               size={26}
-              className="cursor-pointer hover:text-accent-color text-white transition"
+              className="cursor-pointer hover:text-accent-color text-theme transition"
             />
             <div
               onClick={handlePlay}
@@ -195,11 +195,11 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             <IoPlaySkipForward
               onClick={onPlayNext}
               size={26}
-              className="cursor-pointer hover:text-accent-color text-white transition"
+              className="cursor-pointer hover:text-accent-color text-theme transition"
             />
             <button
               onClick={handleRepeatToggle}
-              className="text-white hover:text-accent-color transition"
+              className="text-theme hover:text-accent-color transition"
             >
               {repeatMode === "off" && <LuRepeat />}
               {repeatMode === "all" && (
@@ -266,7 +266,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
             />
             <button
               onClick={handleRepeatToggle}
-              className="text-white hover:text-accent-color transition"
+              className="text-theme hover:text-accent-color transition"
             >
               {repeatMode === "off" && <LuRepeat />}
               {repeatMode === "all" && (
@@ -279,7 +279,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           </div>
 
           <div className="w-full mt-2">
-            <div className="flex items-center gap-5 justify-between text-sm text-white">
+            <div className="flex items-center gap-5 justify-between text-sm text-theme">
               <span>{formatTime(currentTime)}</span>
               <input
                 type="range"
