@@ -88,7 +88,7 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
             <p className="font-bold truncate text-accent-color text-3xl">
               {data.title}
             </p>
-            <p className="text-xl text-gray-300 truncate">{data.author}</p>
+            <p className="text-xl text-theme truncate">{data.author}</p>
           </div>
 
           {!isExpanded && (

@@ -212,7 +212,7 @@ const PlayerContent: React.FC<PlayerContentProps> = ({
           </div>
 
           <div className="w-full px-1">
-            <div className="flex items-center justify-between text-xs text-gray-300">
+            <div className="flex items-center justify-between text-xs text-theme">
               <span>{formatTime(currentTime)}</span>
               <span>{formatTime(duration)}</span>
             </div>

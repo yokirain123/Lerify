@@ -20,7 +20,7 @@ const PlayerItem: React.FC<PlayerItemProps> = ({ data, onClick }) => {
 
   return (
     <div
-      className="flex w-full justify-between items-center h-[100px] cursor-pointer relative shadow-md hover:shadow-lg transition-all duration-300"
+      className="flex w-full justify-between items-center h-[100px] cursor-pointer relative transition-all duration-300"
       onClick={handleClick}
     >
       <div className="relative flex-[0_0_100px] h-full">

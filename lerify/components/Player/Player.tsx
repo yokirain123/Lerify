@@ -33,7 +33,7 @@ const Player = () => {
   return (
     <div className="fixed bottom-0 left-0 w-full z-20 text-theme bg-bg-color">
       {!isExpanded && (
-        <div className="md:hidden flex items-center fixed bottom-0 w-full justify-between px-4 py-3 border-t border-gray-800 bg-dark-bg">
+        <div className="md:hidden flex items-center fixed bottom-0 w-full justify-between px-4 py-3 border-t border-gray-800 bg-bg-color">
           <div
             onClick={() => setIsExpanded(true)}
             role="button"

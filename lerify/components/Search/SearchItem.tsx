@@ -49,7 +49,7 @@ const SearchItem: React.FC<SearchItemProps> = ({ data, onClick }) => {
 
       <div className="flex flex-col justify-center px-4 py-3 text-theme flex-grow relative">
         <p className="text-base sm:text-lg font-bold text-accent-color line-clamp-1">{data.title}</p>
-        <p className="text-sm text-gray-300 truncate">{data.author}</p>
+        <p className="text-sm text-theme truncate">{data.author}</p>
 
         <div className="absolute right-4 top-3 sm:top-1/2 sm:-translate-y-1/2">
           <LikeButton songId={data.id} />
