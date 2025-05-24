@@ -24,6 +24,7 @@ import SearchInput from "../Search/SearchInput";
 import Button from "./Button";
 import Burger from "./Burger";
 import Logo from "./Logo";
+import ThemeToggle from "./ThemeToggle";
 
 interface HeaderProps {
   children: React.ReactNode;
@@ -140,6 +141,11 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                     </Button>
                   </MenuItem>
                   <MenuSeparator className="h-px bg-dark-bg" />
+                  <MenuItem as="div">
+                    <Button>
+                      <ThemeToggle/>
+                    </Button>
+                    </MenuItem>
                   <MenuItem as="div">
                     <Button
                       className="flex gap-3 text-lg items-center justify-center"

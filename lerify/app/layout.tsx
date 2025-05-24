@@ -8,6 +8,7 @@ import UserProvider from "@/providers/UserProvider";
 import ModalProvider from "@/providers/ModalProvider";
 import ToasterProvider from "@/providers/ToasterProvider";
 import Player from "@/components/Player/Player";
+import { ThemeProvider } from "@/providers/ThemeProvider";
 
 const font = Space_Grotesk({ subsets: ["latin"] });
 
@@ -18,22 +19,24 @@ export const metadata: Metadata = {
 
 export const revalidate = 0;
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={font.className}>
-        <ToasterProvider />
-        <SupabaseProvider>
-          <UserProvider>
+        <ThemeProvider>
+          <ToasterProvider />
+          <SupabaseProvider>
+            <UserProvider>
               <ModalProvider />
               <Sidebar>{children}</Sidebar>
               <Player />
-          </UserProvider>
-        </SupabaseProvider>
+            </UserProvider>
+          </SupabaseProvider>
+        </ThemeProvider>
       </body>
     </html>
   );
