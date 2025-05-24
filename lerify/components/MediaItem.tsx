@@ -36,7 +36,7 @@ const MediaItem: React.FC<MediaItemProps> = ({ data, onClick }) => {
           priority
         />
         <div
-          className={`absolute inset-0 flex justify-center items-center bg-black/60 backdrop-blur-sm rounded-l-2xl transition-all duration-300 ease-in-out ${
+          className={`absolute inset-0 flex justify-center items-center bg-dark-bg/60 backdrop-blur-sm rounded-l-2xl transition-all duration-300 ease-in-out ${
             isHovered ? "opacity-100" : "opacity-0"
           }`}
         >

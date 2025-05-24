@@ -40,7 +40,7 @@ const Burger = () => {
 
       {open && (
         <div
-          className="fixed inset-0 bg-black/50 z-40"
+          className="fixed inset-0 bg-dark-bg/50 z-40"
           onClick={() => setOpen(false)}
         />
       )}

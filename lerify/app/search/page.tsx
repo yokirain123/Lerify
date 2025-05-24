@@ -28,7 +28,7 @@ const Search = async ({ searchParams }: Props) => {
   const songs = await getSongsByQuery(query);
 
   return (
-    <div className="bg-black rounded-xl h-full w-full overflow-hidden overflow-y-auto">
+    <div className="bg-dark-bg rounded-xl h-full w-full overflow-hidden overflow-y-auto">
       <Header>
         <div className="mb-2 text-5xl text-white font-black py-4">
           <h1 className="text-5xl text-white font-black pt-4">Search</h1>

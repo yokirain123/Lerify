@@ -10,7 +10,7 @@ export default async function Home() {
   const songs = await getSongs();
   
   return (
-    <div className="bg-black rounded-xl h-full w-full overflow-hidden overflow-y-auto">
+    <div className="bg-dark-bg rounded-xl h-full w-full overflow-hidden overflow-y-auto">
       <Header>
         <div className="mb-2 text-5xl text-white font-black py-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">

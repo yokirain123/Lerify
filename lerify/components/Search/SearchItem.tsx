@@ -39,7 +39,7 @@ const SearchItem: React.FC<SearchItemProps> = ({ data, onClick }) => {
           priority
         />
         <div
-          className={`absolute inset-0 flex justify-center items-center bg-black/60 backdrop-blur-sm transition-all duration-300 ease-in-out ${
+          className={`absolute inset-0 flex justify-center items-center bg-dark-bg/60 backdrop-blur-sm transition-all duration-300 ease-in-out ${
             isHovered && !isLiked ? "opacity-100" : "opacity-0"
           } ${!isLiked && "sm:rounded-l-2xl rounded-t-2xl sm:rounded-t-none"}`}
         >

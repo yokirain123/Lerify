@@ -54,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
   };
 
   return (
-    <div className={twMerge(`h-fit bg-black py-3 px-6`, className)}>
+    <div className={twMerge(`h-fit bg-dark-bg py-3 px-6`, className)}>
       <div className="w-full flex items-center gap-14 justify-between relative">
         <div className="hidden md:flex gap-[2px] items-center">
           <button
@@ -82,7 +82,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
         </div>
 
         {showMobileSearch ? (
-  <div className="w-full flex px-4 py-2 bg-black z-10">
+  <div className="w-full flex px-4 py-2 bg-dark-bg z-10">
     <SearchInput className="w-full">
       <button
         onClick={toggleMobileSearch}
@@ -139,7 +139,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                       Profile <MdAccountCircle size={25} />
                     </Button>
                   </MenuItem>
-                  <MenuSeparator className="h-px bg-black" />
+                  <MenuSeparator className="h-px bg-dark-bg" />
                   <MenuItem as="div">
                     <Button
                       className="flex gap-3 text-lg items-center justify-center"

@@ -35,7 +35,7 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
           alt="Song Cover"
         />
         <div
-          className={`absolute inset-0 flex justify-center items-center bg-black/45 backdrop-blur-sm transition-all duration-300 ease-in-out
+          className={`absolute inset-0 flex justify-center items-center bg-dark-bg/45 backdrop-blur-sm transition-all duration-300 ease-in-out
             ${isHovered ? "opacity-100" : "opacity-0"}`}
         >
           <FaPlay size={30} className="text-white" />

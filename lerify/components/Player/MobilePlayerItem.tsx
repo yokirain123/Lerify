@@ -42,7 +42,7 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
         className="object-cover blur-md scale-110 z-0"
         priority
       />
-      <div className="absolute inset-0 bg-black/60 z-10" />
+      <div className="absolute inset-0 bg-dark-bg/60 z-10" />
 
       <div className="relative z-20 h-full w-full">
         {isExpanded && (
