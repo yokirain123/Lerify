@@ -139,7 +139,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                   <MenuItem as="div">
                     <Button
                     className="flex gap-3 text-lg items-center justify-center">
-                      Toggle theme <ThemeToggle />
+                      <ThemeToggle />
                     </Button>
                   </MenuItem>
                   <MenuSeparator className="h-px bg-dark-bg" />

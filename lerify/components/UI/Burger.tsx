@@ -11,6 +11,7 @@ import { useSupabaseClient } from "@supabase/auth-helpers-react";
 import useAuthModal from "@/hooks/useAuthModal";
 import { useUser } from "@/hooks/useUser";
 import { TbPlaylist } from "react-icons/tb";
+import ThemeToggle from "./ThemeToggle";
 
 const Burger = () => {
   const [open, setOpen] = useState(false);
@@ -103,8 +104,13 @@ const Burger = () => {
               >
                 <TbPlaylist size={24} /> Playlists
               </button>
+
+              <hr className="border-gray-600 my-4" />
+
+              <ThemeToggle />
             </div>
           </div>
+          
 
           <div className="mt-auto">
             <hr className="border-gray-600 my-4" />

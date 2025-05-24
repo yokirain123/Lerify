@@ -18,7 +18,7 @@ export default function ThemeToggle() {
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
+      Theme Toggle {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
     </button>
   )
 }

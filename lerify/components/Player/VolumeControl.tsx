@@ -43,7 +43,7 @@ const VolumeControl: React.FC<VolumeControlProps> = ({ volume, setVolume }) => {
     <div className="flex items-center gap-2">
       <VolumeIcon
         size={25}
-        className="cursor-pointer text-theme hover:text-accent-color transition"
+        className="cursor-pointer text-white hover:text-accent-color transition"
         onClick={toggleMute}
       />
 

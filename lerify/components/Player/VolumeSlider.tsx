@@ -1,25 +1,33 @@
-import { useState } from "react";
+"use client";
 
-export default function VolumeSlider() {
-  const [volume, setVolume] = useState(50); // 0 - 100
+import * as RadixSlider from "@radix-ui/react-slider";
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setVolume(Number(e.target.value));
-  };
+interface VolumeSliderProps {
+  value?: number;
+  onChange?: (value: number) => void;
+}
+
+const VolumeSlider: React.FC<VolumeSliderProps> = ({ value = 1, onChange }) => {
+  const handleChange = (newValue: number[]) => {
+    onChange?.(newValue[0]);
+  }
 
   return (
-    <div className="flex items-center gap-3 w-full max-w-[150px]">
-      <input
-        type="range"
-        min={0}
-        max={100}
-        value={volume}
-        onChange={handleChange}
-        className="w-full h-1 rounded-lg appearance-none cursor-pointer bg-transparent"
-        style={{
-          background: `linear-gradient(to right, #4ade80 0%, #4ade80 ${volume}%, #374151 ${volume}%, #374151 100%)`,
-        }}
-      />
-    </div>
+    <RadixSlider.Root
+    className="relative flex items-center select-none touch-none w-full h-10"
+      defaultValue={[1]}
+      value={[value]}
+      onValueChange={handleChange}
+      max={1}
+      step={0.1}
+      aria-label="Volume"
+    >
+      <RadixSlider.Track
+      className="bg-accent-color relative grow rounded-full h-[3px]">
+          <RadixSlider.Range className="absolute bg-[#4b5563] dark:bg-white rounded-full h-full" />
+      </RadixSlider.Track>
+    </RadixSlider.Root>
   );
-}
+};
+
+export default VolumeSlider;
