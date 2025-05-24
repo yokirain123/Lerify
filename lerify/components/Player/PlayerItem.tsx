@@ -37,7 +37,7 @@ const PlayerItem: React.FC<PlayerItemProps> = ({ data, onClick }) => {
           <p className="font-bold text-accent-color truncate whitespace-nowrap">
             {data.title}
           </p>
-          <p className="text-sm text-gray-300 truncate">{data.author}</p>
+          <p className="text-sm text-inactive-text truncate">{data.author}</p>
         </div>
 
         <div className=" flex items-center">
