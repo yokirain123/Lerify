@@ -16,10 +16,9 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2"
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />} Change theme
+      {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
     </button>
   )
 }
