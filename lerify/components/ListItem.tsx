@@ -36,7 +36,7 @@ const ListItem: React.FC<ListItemProps> = ({ image, name, href }) => {
             ${isHovered ? "opacity-100 scale-100" : "opacity-0 scale-100"}
             transition-all duration-300 ease-in-out rounded-2xl`}
         >
-          <FaPlay size={24} className="text-theme" />
+          <FaPlay size={24} className="text-white" />
         </div>
       </div>
       <p className="text-[var(--accent-color)] font-bold text-base sm:text-lg md:text-2xl truncate">

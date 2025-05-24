@@ -38,7 +38,7 @@ const SongItem: React.FC<SongItemProps> = ({ data, onClick }) => {
           className={`absolute inset-0 flex justify-center items-center bg-dark-bg/45 backdrop-blur-sm transition-all duration-300 ease-in-out
             ${isHovered ? "opacity-100" : "opacity-0"}`}
         >
-          <FaPlay size={30} className="text-theme" />
+          <FaPlay size={30} className="text-white" />
         </div>
       </div>
 

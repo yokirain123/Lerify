@@ -16,10 +16,10 @@ export default function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition"
+      className="p-2"
       aria-label="Toggle theme"
     >
-      {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
+      {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />} Change theme
     </button>
   )
 }

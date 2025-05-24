@@ -83,29 +83,24 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
         </div>
 
         {showMobileSearch ? (
-  <div className="w-full flex px-4 py-2 bg-dark-bg z-10">
-    <SearchInput className="w-full">
-      <button
-        onClick={toggleMobileSearch}
-        className="absolute right-4 top-1/2 -translate-y-1/2 text-theme"
-      >
-        <IoClose size={24} />
-      </button>
-    </SearchInput>
-  </div>
-) : (
-  <button
-  onClick={toggleMobileSearch}
-  className="md:hidden"
->
-  <HiSearch
-    size={45}
-    className="text-theme hover:text-[var(--accent-color)] transition duration-300"
-  />
-</button>
-
-)}
-
+          <div className="w-full flex px-4 py-2 bg-dark-bg z-10">
+            <SearchInput className="w-full">
+              <button
+                onClick={toggleMobileSearch}
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-theme"
+              >
+                <IoClose size={24} />
+              </button>
+            </SearchInput>
+          </div>
+        ) : (
+          <button onClick={toggleMobileSearch} className="md:hidden">
+            <HiSearch
+              size={45}
+              className="text-theme hover:text-[var(--accent-color)] transition duration-300"
+            />
+          </button>
+        )}
 
         <div className="hidden md:flex items-center gap-x-1 text-lg">
           {user ? (
@@ -143,9 +138,10 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                   <MenuSeparator className="h-px bg-dark-bg" />
                   <MenuItem as="div">
                     <Button>
-                      <ThemeToggle/>
+                      <ThemeToggle />
                     </Button>
-                    </MenuItem>
+                  </MenuItem>
+                  <MenuSeparator className="h-px bg-dark-bg" />
                   <MenuItem as="div">
                     <Button
                       className="flex gap-3 text-lg items-center justify-center"
