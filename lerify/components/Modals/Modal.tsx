@@ -32,7 +32,7 @@ const Modal: React.FC<ModalProps> = ({
           <Dialog.Description className="text-md leading-normal text-center text-theme">
             {description}
           </Dialog.Description>
-          <div className="w-full border-[#14180c] border-small my-3"></div>
+          <div className="w-full my-3"></div>
           <div>{children}</div>
           <Dialog.Close asChild>
             <button

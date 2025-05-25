@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 
 import Modal from "./Modal";
 import useAuthModal from "@/hooks/useAuthModal";
+import { useTheme } from "next-themes";
 
 const AuthModal = () => {
   const supabaseClient = useSupabaseClient();
@@ -22,7 +23,9 @@ const AuthModal = () => {
     if (session) {
       console.log("User Session:", session);
       if (!session.user?.email) {
-        console.error("No email received from Spotify! Supabase requires an email.");
+        console.error(
+          "No email received from Spotify! Supabase requires an email."
+        );
       }
       onClose();
       router.refresh();
@@ -44,7 +47,9 @@ const AuthModal = () => {
   const [socialLayout, setSocialLayout] = useState<SocialLayout>(
     socialAlignments[0] satisfies SocialLayout
   );
-  
+
+  const { theme } = useTheme();
+
   return (
     <Modal
       title="Welcome"
@@ -53,7 +58,7 @@ const AuthModal = () => {
       onChange={onChange}
     >
       <Auth
-        theme="dark"
+        theme={theme === "dark" ? "dark" : "default"}
         socialLayout={socialLayout}
         providers={["google", "github"]}
         appearance={{
@@ -61,8 +66,11 @@ const AuthModal = () => {
           variables: {
             default: {
               colors: {
-                brand: "#131313",
+                brand: "var(--bg-color)",
                 brandAccent: "#88b4fc",
+                inputBackground: theme === "dark" ? "#1a1a1a" : "white",
+                inputText: theme === "dark" ? "#ffffff" : "#000000",
+                brandButtonText: "var(--theme)",
               },
               radii: {
                 inputBorderRadius: borderRadius,

@@ -114,14 +114,14 @@ const UploadModal = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <Input
-          className="rounded-t-xl"
+          className="rounded-t-xl bg-[#e0e0e0] dark:bg-[#232323]"
           id="title"
           disabled={isLoading}
           {...register("title", { required: true })}
           placeholder="Song Title"
         />
         <Input
-          className="rounded-b-xl"
+          className="rounded-b-xl bg-[#e0e0e0] dark:bg-[#232323]"
           id="author"
           disabled={isLoading}
           {...register("author", { required: true })}
@@ -132,7 +132,7 @@ const UploadModal = () => {
             <div className="pb-1">Select a song file</div>
             <label
               htmlFor="song"
-              className="p-3 bg-bg-color hover:text-accent-color transition duration-300 text-center cursor-pointer absolute w-[100%] rounded-xl"
+              className="p-3 bg-[#e0e0e0] dark:bg-[#232323] hover:text-accent-color transition duration-300 text-center cursor-pointer absolute w-[100%] rounded-xl"
             >
               {selectedSong || "Choose a song"}
             </label>
@@ -149,7 +149,7 @@ const UploadModal = () => {
             <div className="pb-1">Select an image</div>
             <label
               htmlFor="image"
-              className="p-3 bg-bg-color hover:text-accent-color transition duration-300 text-center cursor-pointer absolute w-[100%] rounded-xl"
+              className="p-3 bg-[#e0e0e0] dark:bg-[#232323] hover:text-accent-color transition duration-300 text-center cursor-pointer absolute w-[100%] rounded-xl"
               aria-placeholder=""
             >
               {selectedImage || "Choose an image"}
@@ -172,7 +172,7 @@ const UploadModal = () => {
           </div>
         )}
 
-        <div className="w-full border-[#14180c] border-small my-3"></div>
+        <div className="w-full my-3"></div>
         <Button
           className="rounded-xl border-accent-color border-2 font-bold p-6 flex items-center justify-center"
           disabled={isLoading}

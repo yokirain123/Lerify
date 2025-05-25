@@ -81,7 +81,7 @@ const MobilePlayerItem: React.FC<MobilePlayerItemProps> = ({
           </div>
 
           <div
-            className={`text-center ${
+            className={`text-center bg-black/30 rounded-2xl p-3 ${
               isExpanded ? "mt-6" : "flex-1 ml-2 text-left"
             }`}
           >
