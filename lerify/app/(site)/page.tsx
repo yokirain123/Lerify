@@ -14,15 +14,15 @@ export default async function Home() {
       <Header>
         <div className="mb-2 text-5xl text-theme font-black py-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
-            Home
+            Головна
           </div>
         </div>
-        <ListItem image="/images/like.png" name={"Liked"} href={"liked"} />
+        <ListItem image="/images/like.png" name={"Вподобані пісні"} href={"liked"} />
       </Header>
 
       <div className="mt-2 mb-7 px-6 pb-28"> 
   <div className="flex justify-between flex-col">
-    <h1 className="text-theme font-black text-3xl mb-6">Newest songs</h1>
+    <h1 className="text-theme font-black text-3xl mb-6">Нові пісні</h1>
     <div className="w-full">
       <PageContent songs={songs} />
     </div>

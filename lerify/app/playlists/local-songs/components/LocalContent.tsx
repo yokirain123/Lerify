@@ -1,7 +1,6 @@
 "use client"
 
 import MediaItem from '@/components/MediaItem';
-import SongItem from '@/components/SongItem';
 import useOnPlay from '@/hooks/useOnPlay';
 import { Song } from '@/types';
 import React from 'react';
@@ -17,7 +16,7 @@ const LocalContent: React.FC<PageContentProps> = ({
 
     if (songs.length === 0) {
         return (
-            <div className='text-theme text-center mt-10'>No songs available</div>
+            <div className='text-theme text-center mt-10'>Пісні недоступні</div>
         );
     }
 

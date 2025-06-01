@@ -43,7 +43,7 @@ const Page: FC<PlaylistsProps> = () => {
       <Header>
         <div className="mb-2 text-5xl text-theme font-black py-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
-            Playlists
+            Плейлисти
           </div>
         </div>
       </Header>
@@ -53,7 +53,7 @@ const Page: FC<PlaylistsProps> = () => {
             className="text-theme text-xl border-bg-color hover:bg-[var(--bg-color)] transition-all duration-300 border-2 p-5 rounded-xl flex gap-2 items-center cursor-pointer uppercase hover:text-accent-color"
             onClick={onClick}
           >
-            Add your song
+            Завантажити свою пісню
             <FaPlus className="ml-2" size={20} />
           </div>
         </div>
@@ -65,14 +65,14 @@ const Page: FC<PlaylistsProps> = () => {
               key={`liked-${index}`}
               {...item}
               image="/images/like.png"
-              name={"Liked"}
+              name={"Вподобані"}
               href={"liked"}
             />
             <ListItem
               key={`local-${index}`}
               {...item}
               image="/images/local.png"
-              name={"Local Songs"}
+              name={"Локальні пісні"}
               href={item.href}
             />
           </div>

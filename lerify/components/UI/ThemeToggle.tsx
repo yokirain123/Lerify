@@ -20,7 +20,7 @@ export default function ThemeToggle() {
       aria-label="Toggle theme"
       className='flex items-center justify-center gap-3'
     >
-      Theme Toggle {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
+      Змінити тему {theme === 'dark' ? <FaSun size={20} /> : <FaMoon size={20} />}
     </Button>
   )
 }

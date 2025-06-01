@@ -53,7 +53,7 @@ const Profile = () => {
       <Header>
         <div className="mb-2 text-5xl text-theme font-black py-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-3 mt-4">
-            Profile
+            Профіль
           </div>
         </div>
       </Header>
@@ -79,7 +79,7 @@ const Profile = () => {
               {userName}
             </span>
             <div className="text-lg sm:text-xl">
-              Liked songs: {loading ? "Loading..." : likedSongs.length}
+              Вподобаних пісень: {loading ? "Loading..." : likedSongs.length}
             </div>
           </div>
         </div>

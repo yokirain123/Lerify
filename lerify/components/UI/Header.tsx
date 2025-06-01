@@ -132,7 +132,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                       onClick={() => router.push("/profile")}
                       className="flex gap-3 text-lg items-center justify-center"
                     >
-                      Profile <MdAccountCircle size={25} />
+                      Профіль <MdAccountCircle size={25} />
                     </Button>
                   </MenuItem>
                   <MenuSeparator className="h-px bg-dark-bg" />
@@ -148,7 +148,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
                       className="flex gap-3 text-lg items-center justify-center"
                       onClick={handleLogout}
                     >
-                      Log out <IoLogOut size={25} />
+                      Вийти <IoLogOut size={25} />
                     </Button>
                   </MenuItem>
                 </MenuItems>
@@ -159,7 +159,7 @@ const Header: React.FC<HeaderProps> = ({ children, className }) => {
               onClick={authModal.onOpen}
               className="flex items-center rounded-2xl px-4 text-theme font-bold gap-2 py-8 text-2xl"
             >
-              Log in
+              Увійти
               <MdAccountCircle size={30} />
             </Button>
           )}

@@ -44,7 +44,7 @@ const UploadModal = () => {
       const songFile = values.song?.[0];
 
       if (!imageFile || !songFile || !user) {
-        toast.error("Missing fields");
+        toast.error("Будь ласка, виберіть файл пісні та зображення");
         return;
       }
 
@@ -58,7 +58,7 @@ const UploadModal = () => {
         });
       if (songError) {
         setIsLoading(false);
-        return toast.error("Failed song upload");
+        return toast.error("Не вдалося завантажити пісню");
       }
 
       const { data: imageData, error: imageError } =
@@ -70,7 +70,7 @@ const UploadModal = () => {
           });
       if (imageError) {
         setIsLoading(false);
-        return toast.error("Failed image upload");
+        return toast.error("Не вдалося завантажити зображення");
       }
 
       const { error: supabaseError } = await supabaseClient
@@ -90,11 +90,11 @@ const UploadModal = () => {
 
       router.refresh();
       setIsLoading(false);
-      toast.success("Song created!");
+      toast.success("Пісня успішно завантажена!");
       reset();
       uploadModal.onClose();
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("Щось пішло не так, спробуйте ще раз.");
     } finally {
       setIsLoading(false);
     }
@@ -104,8 +104,8 @@ const UploadModal = () => {
 
   return (
     <Modal
-      title="Upload Your Music"
-      description="Fill out the details and upload your song file and cover image."
+      title="Завантажити свою пісню"
+      description="Введіть деталі вашої пісні та завантажте її разом із зображенням обкладинки."
       isOpen={uploadModal.isOpen}
       onChange={onChange}
     >
@@ -118,23 +118,23 @@ const UploadModal = () => {
           id="title"
           disabled={isLoading}
           {...register("title", { required: true })}
-          placeholder="Song Title"
+          placeholder="Назва пісні"
         />
         <Input
           className="rounded-b-xl bg-[#e0e0e0] dark:bg-[#232323]"
           id="author"
           disabled={isLoading}
           {...register("author", { required: true })}
-          placeholder="Song Author"
+          placeholder="Автор пісні"
         />
         <ul className="flex flex-col gap-5 mt-5">
           <li>
-            <div className="pb-1">Select a song file</div>
+            <div className="pb-1">Виберіть файл пісні</div>
             <label
               htmlFor="song"
               className="p-3 bg-[#e0e0e0] dark:bg-[#232323] hover:text-accent-color transition duration-300 text-center cursor-pointer absolute w-[100%] rounded-xl"
             >
-              {selectedSong || "Choose a song"}
+              {selectedSong || "Виберіть файл пісні"}
             </label>
             <Input
               className="cursor-pointer invisible"
@@ -146,13 +146,13 @@ const UploadModal = () => {
             />
           </li>
           <li>
-            <div className="pb-1">Select an image</div>
+            <div className="pb-1">Виберіть файл зображення</div>
             <label
               htmlFor="image"
               className="p-3 bg-[#e0e0e0] dark:bg-[#232323] hover:text-accent-color transition duration-300 text-center cursor-pointer absolute w-[100%] rounded-xl"
               aria-placeholder=""
             >
-              {selectedImage || "Choose an image"}
+              {selectedImage || "Виберіть файл зображення"}
             </label>
             <Input
               className="cursor-pointer invisible"
@@ -168,7 +168,7 @@ const UploadModal = () => {
         {isLoading && (
           <div className="flex justify-center items-center mt-4 text-center">
             <div className="loader"></div>
-            <span className="ml-2">Uploading, please wait...</span>
+            <span className="ml-2">Завантажується, зачекайте хвильку...</span>
           </div>
         )}
 
@@ -178,7 +178,7 @@ const UploadModal = () => {
           disabled={isLoading}
           type="submit"
         >
-          Upload song
+          Завантажити пісню
         </Button>
       </form>
     </Modal>

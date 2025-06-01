@@ -52,8 +52,8 @@ const AuthModal = () => {
 
   return (
     <Modal
-      title="Welcome"
-      description="to the world of endless music."
+      title="Ласкаво просимо"
+      description="до світу нескінченої музики."
       isOpen={isOpen}
       onChange={onChange}
     >
@@ -81,6 +81,26 @@ const AuthModal = () => {
           },
         }}
         supabaseClient={supabaseClient}
+        localization={{
+          variables: {
+            sign_in: {
+              email_label: "Електронна пошта",
+              password_label: "Пароль",
+              button_label: "Увійти",
+               email_input_placeholder: "Ваша електронна адреса",
+        password_input_placeholder: "Ваш пароль",
+            },
+            sign_up: {
+              email_label: "Електронна пошта",
+              password_label: "Пароль",
+              button_label: "Зареєструватися",
+              link_text: "Не маєте акаунта? Зареєструйтеся",
+            },
+            forgotten_password: {
+        link_text: "Забули пароль?",
+      },
+          },
+        }}
       />
     </Modal>
   );

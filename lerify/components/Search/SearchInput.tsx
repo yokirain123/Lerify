@@ -19,17 +19,17 @@ interface SearchInputProps {
     const [placeholder, setPlaceholder] = useState<string>("");
   
     const placeholders = [
-      "Search...",
-      "What are you looking for?",
-      "So, what's on your mind today?",
-      "Discover something new?",
-      "Enter a title or artist...",
-      "The perfect track is just a search away...",
-      "Let the music hunt begin...",
-      "Search for a song, no need to roll for initiative.",
-      "Need a track that’s over 9000?",
-      "Find a tune to make you feel like The Chosen One.",
-      "Type a song to relive Back to the Future moments.",
+      "Пошук...",
+      "Що шукаєш?",
+      "Про що ти сьогодні думаєш?",
+      "Відкрий для себе щось новеньке!",
+      "Введи назву пісні або виконавця...",
+      "Ідеальний трек вже чекає на тебе...",
+      "Нехай полювання на музику розпочнеться...",
+      "Шукай пісню — кидати кубик на ініціативу не потрібно.",
+      "Потрібен трек, що перевищує 9000?",
+      "Знайди мелодію, щоб відчути себе Обраним.",
+      "Введи пісню та перенесися Назад у майбутнє.",
     ];
   
     useEffect(() => {
@@ -68,4 +68,4 @@ interface SearchInputProps {
     );
   };
   
-  export default SearchInput;  
+  export default SearchInput;

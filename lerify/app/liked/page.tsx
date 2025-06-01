@@ -36,7 +36,7 @@ function Liked() {
   return (
     <div className="w-full">
       <Header>
-        <div className="hidden">Liked</div>
+        <div className="hidden">Вподобані</div>
       </Header>
       <div className="flex flex-col sm:flex-row items-center gap-5 px-4 sm:px-10 my-5">
         <div className="relative w-40 h-40">
@@ -48,9 +48,9 @@ function Liked() {
           />
         </div>
         <div className="flex flex-col text-center sm:text-left">
-          <p className="font-semibold text-inactive-text">Playlist</p>
+          <p className="font-semibold text-inactive-text">Плейлист</p>
           <h1 className="mb-2 text-4xl sm:text-5xl text-theme font-black">
-            Liked Songs
+            Вподобані пісні
           </h1>
         </div>
       </div>
